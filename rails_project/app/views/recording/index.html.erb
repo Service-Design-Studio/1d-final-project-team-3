@@ -2,6 +2,7 @@
 <video style="border: 1px solid black" id="live" width="300"></video>
 <div>
     <button id="start">Start</button>
-    <button id="stop">Stop and save</button>
+    <%= button_to 'Stop and Save', 'save_video', method: "get", id: "stop" =%>
     <button> Record </button>
+    
 </div>

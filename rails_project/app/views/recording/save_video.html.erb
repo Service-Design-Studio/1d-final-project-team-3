@@ -1,0 +1,9 @@
+<h1>Save Video</h1>
+<h2 contenteditable="true">Video Title</h2>
+<%# <video style="border: 1px solid black" id="live" width="300"> %>
+<%# <source src="../assets/videos/pby_wave.mp4"> %>
+<%= video_tag "pby_wave.mp4", controls:true%>
+
+<div>
+ <%= button_to 'Save Video', '../home/index', method: "get" =%>
+</div>
