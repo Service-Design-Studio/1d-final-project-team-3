@@ -1,8 +1,30 @@
-<h1>Record Video</h1>
-<video style="border: 1px solid black" id="live" width="300"></video>
-<div>
-    <button id="start">Start</button>
-    <%= button_to 'Stop and Save', 'save_video', method: "get", id: "stop" =%>
-    <button> Record </button>
-    
+<!-- Navbar start -->
+<nav class="navbar navbar-light bg-light padding-sm">
+  <span class="mb-0 display-4">Recording</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+</nav>
+<div class="collapse navbar-collase" id="navbarToggleExternalContent">
+    <div class='child-component text-right'>
+        <ul  class="navbar-nav mr-auto float-right h2">
+          <li class="nav-item active"></li>
+            <%= link_to 'Record','./index' %>
+          </li>
+          <li class="nav-item active margin-top-md"></li>
+            <%= link_to 'Log Out','#' %>
+          </li>
+        </ul>
+    </div>
+</div>
+<!-- Navbar end -->
+<div class='padding-sm'>
+    <video style="border: 1px solid black" id="live" width="300"></video>
+</div>
+<div class='padding-sm'>
+    <button id="start", class="btn btn-primary btn-lg btn-block margin-top-md width-max">Start</button>    
+</div>
+<div class='padding-sm'>
+    <%= button_to 'Stop and Save', 'save_video', method: "get", id: "stop",class:"btn btn-secondary btn-lg btn-block width-max" =%>
 </div>
