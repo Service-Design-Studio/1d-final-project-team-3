@@ -13,6 +13,7 @@ import {initRecordVideo} from "Recording"
 //= require turbolinks
 //= require_tree .
 window.onload = () => initRecordVideo();
+// window.onbeforeunload = () => initRecordVideo.stopVideo();
 
 Rails.start()
 ActiveStorage.start()
