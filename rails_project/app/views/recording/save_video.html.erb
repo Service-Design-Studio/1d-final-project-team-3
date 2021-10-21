@@ -1,6 +1,6 @@
 <!-- Navbar start -->
 <nav class="navbar navbar-light bg-light padding-sm">
-  <span class="mb-0 display-4">Recording</span>
+  <span class="mb-0 display-4">Review and Save</span>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,12 +19,15 @@
     </div>
 </div>
 <!-- Navbar end -->
-<div class='padding-sm'>
-    <video style="border: 1px solid black" id="live" width="300"></video>
-</div>
-<div class='padding-sm'>
-    <button id="start", class="btn btn-primary btn-lg btn-block margin-top-md width-max">Start</button>    
-</div>
-<div class='padding-sm'>
-    <%= button_to 'Stop and Save', 'save_video', method: "get", id: "stop",class:"btn btn-secondary btn-lg btn-block width-max" =%>
+<div class='position-relative'>
+  <div class='padding-sm'>
+    <h2 class='h2' contenteditable="true">Video Title</h2>
+    <small id="emailHelp" class="form-text text-muted">Click on the title above to edit!</small>
+  </div>
+  <div class='padding-sm'>
+    <%= video_tag "pby_wave.mp4", controls:true%>
+  </div>
+  <div class='padding-sm'>
+    <%= button_to 'Save Video', '../home/index', method: "get",class:"btn btn-primary btn-lg btn-block margin-top-md width-max" =%>
+  </div>
 </div>
