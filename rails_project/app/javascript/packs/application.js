@@ -6,14 +6,15 @@
 import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import {initRecordVideo} from "Recording"
+import {initRecordVideo, initSaveVideo} from "Recording"
 //= require rails-ujs
 //= require jquery
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
 window.onload = () => initRecordVideo();
-// window.onbeforeunload = () => initRecordVideo.stopVideo();
+// window.onload = () => initSaveVideo();
+// window.onbeforeunload = () => RecordVideo().stopVideo;
 
 Rails.start()
 ActiveStorage.start()
