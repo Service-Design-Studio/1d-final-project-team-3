@@ -9,6 +9,7 @@ import "channels"
 import {initRecordVideo} from "Recording"
 
 window.onload = () => initRecordVideo();
+// window.onbeforeunload = () => initRecordVideo.stopVideo();
 
 Rails.start()
 ActiveStorage.start()
