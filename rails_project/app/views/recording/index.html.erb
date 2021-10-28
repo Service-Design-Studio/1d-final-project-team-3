@@ -1,3 +1,10 @@
+<%= javascript_include_tag 'livestream.js' %>
+<%= javascript_include_tag 'recording.js' %>
+
+<script>
+  window.onload = () => initRecordVideo();
+  window.onbeforeunload = () => RecordVideo().stopVideo;
+</script>
 <!-- Navbar start -->
 <nav class="navbar navbar-light bg-light padding-sm">
   <span class="mb-0 display-4">Recording</span>
@@ -25,3 +32,4 @@
 <div class='padding-sm'>
     <button id="start", class="btn btn-primary btn-lg btn-block margin-top-md width-max">Start</button>    
 </div>
+
