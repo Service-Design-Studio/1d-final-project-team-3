@@ -75,7 +75,19 @@ const initRecordVideo = () => {
       isRecording = !isRecording;
       start.style.background = "#0000FF";
       start.textContent = "Start"
-      location.href = "save_video"
+      // TODO: POST to recording#create to save the video
+      fetch('http://localhost:3000/recording/',{method:"POST", redirect: 'follow'})
+      .then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
+    })
+
+      // xhr.setRequestHeader('Content-Type', 'application/json');
+      // xhr.send(JSON.stringify({
+      //   value: value
+      // }));
+      // location.href = "/recording/1/edit"
 
     } else {
       isRecording = !isRecording;

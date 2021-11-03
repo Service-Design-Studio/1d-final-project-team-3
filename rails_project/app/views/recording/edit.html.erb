@@ -1,0 +1,13 @@
+<%= render "shared/nav" %>
+<div class='position-relative'>
+  <div class='padding-sm'>
+    <h2 class='h2' contenteditable="true">Video Title</h2>
+    <small id="emailHelp" class="form-text text-muted">Click on the title above to edit!</small>
+  </div>
+  <div class='padding-sm'>
+    <%= video_tag "pby_wave.mp4", controls:true, id: "video_player"%>
+  </div>
+  <div class='padding-sm'>
+    <%= button_to 'Save Video', '../home/index', method: "get",class:"btn btn-primary btn-lg btn-block margin-top-md width-max" =%>
+  </div>
+</div>
