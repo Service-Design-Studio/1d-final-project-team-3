@@ -18,7 +18,7 @@ require "base64"
 class LivestreamChannel < ApplicationCable::Channel
   @@ENDPOINT_ID="8113384262289326080"
   @@PROJECT_ID="1055029069246"
-  @@MODEL_ID="untitled_1636363951941_202111894247"
+  @@MODEL_ID="2303173394981453824"
   @@LOCATION="us-central1"
   @@AUTOML_CLIENT=Google::Cloud::AutoML::V1::PredictionService::Client.new do |config|
       config.credentials = "#{__dir__}/sds-final-project-team-3-95b5816a9039.json"
