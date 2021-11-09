@@ -18,9 +18,10 @@ App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
           var reader = new FileReader();
           reader.readAsDataURL(event.data); 
           reader.onloadend = function() {
-            var base64data = reader.result; 
+            var base64data = reader.result.split(",")[2]; 
             console.log("SENDING DATA NOW")
             // App.appearance.send({data: "WEEEEEE"})
+            console.log(base64data)
             App.appearance.send({data : base64data})
           }
         };
