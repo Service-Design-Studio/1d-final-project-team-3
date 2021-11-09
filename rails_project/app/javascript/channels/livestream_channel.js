@@ -25,7 +25,7 @@ App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
           }
         };
         // this argument inside .start() is the interval to send (in ms)
-        mediaRecorder.start(10000)
+        mediaRecorder.start(5000)
       })
     }
   },
