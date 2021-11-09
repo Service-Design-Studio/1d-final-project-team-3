@@ -19,11 +19,13 @@ App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
           reader.readAsDataURL(event.data); 
           reader.onloadend = function() {
             var base64data = reader.result; 
+            console.log("SENDING DATA NOW")
+            // App.appearance.send({data: "WEEEEEE"})
             App.appearance.send({data : base64data})
           }
         };
         // this argument inside .start() is the interval to send (in ms)
-        mediaRecorder.start(1000)
+        mediaRecorder.start(10000)
       })
     }
   },
@@ -35,5 +37,6 @@ App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
+    console.log('this is clientside receiving something')
   }
 });
