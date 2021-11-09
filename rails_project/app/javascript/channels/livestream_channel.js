@@ -1,5 +1,4 @@
 import { createConsumer } from "@rails/actioncable"
-
 const App = {}
 App.cable = createConsumer()
 App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
@@ -19,7 +18,7 @@ App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
           var reader = new FileReader();
           reader.readAsDataURL(event.data); 
           reader.onloadend = function() {
-            var base64data = reader.result;                
+            var base64data = reader.result; 
             App.appearance.send({data : base64data})
           }
         };
@@ -36,6 +35,5 @@ App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
-    console.log(data)
   }
 });

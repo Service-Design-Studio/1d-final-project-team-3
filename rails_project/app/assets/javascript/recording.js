@@ -115,6 +115,7 @@ const initRecordVideo = () => {
   }
 
   start.addEventListener("click", btnOnClick);
+  
   var streamObj = startVideo();
   var link = document.createElement("a");
 }

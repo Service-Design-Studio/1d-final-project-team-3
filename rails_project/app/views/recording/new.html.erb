@@ -1,3 +1,11 @@
+<%= javascript_include_tag 'livestream.js' %>
+<%= javascript_include_tag 'recording.js' %>
+
+<script>
+  window.onload = () => initRecordVideo();
+  window.onbeforeunload = () => RecordVideo().stopVideo;
+</script>
+
 <%= render "shared/nav" %>
 <div class='padding-sm'>
     <video style="border: 1px solid black" id="live" width="300"></video>
