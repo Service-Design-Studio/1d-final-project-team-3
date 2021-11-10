@@ -79,7 +79,11 @@ class LivestreamChannel < ApplicationCable::Channel
       request.body = {
         "instances":[{
           "content": image_bytes
-        }]
+        }],
+        "parameters": {
+          "confidenceThreshold": 0.1,
+          "maxPredictions": 1
+        }      
         }.to_json
       p 'sending request'
       response = http.request(request)
