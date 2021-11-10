@@ -14,8 +14,7 @@ class LivestreamChannel < ApplicationCable::Channel
   @@ServiceAccount = ServiceAccountHelper.instance
   
   def subscribed
-    # p "yo"
-    # stream_from "livestream_channel"
+    stream_from "LivestreamChannel"
   end
 
   def unsubscribed
@@ -33,11 +32,19 @@ class LivestreamChannel < ApplicationCable::Channel
       p "sending data"
       response = self.send_request payload:payload
 
-      p response.body
+      data = JSON.parse(response.body)
+
+      # Get display name
+      p data["predictions"][0]["displayNames"][0]
     rescue => exception
-      puts ("EXCEPTION")
-      # puts(exception)
+      puts(exception)
     end
+    begin
+      ActionCable.server.broadcast("LivestreamChannel",{"data" => data["predictions"][0]["displayNames"][0]})
+    rescue=> exception
+      puts exception
+    end
+    # TODO: send data back to client.
   end
 
   def send_request(payload:)
@@ -66,7 +73,6 @@ class LivestreamChannel < ApplicationCable::Channel
       header = {"Content-Type":"application/json", "Authorization":token}
       RestClient.post(url, payload, headers=header)
     rescue => exception
-      p ("EXCEPTION")
       p exception
   end
 

@@ -23,7 +23,7 @@ App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
               let base64data = canvas.toDataURL().slice(22)
               App.appearance.send({data : base64data})
           })
-        },5000)
+        },1000)
         // const mediaRecorder = new MediaRecorder(mediaStream,{mimeType:"image/jpeg"})
         // mediaRecorder.ondataavailable = event => {
         //   //here, event.data is a blob of the image.
@@ -50,5 +50,8 @@ App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     console.log('this is clientside receiving something')
+    console.log(data)
+    const text = document.getElementById('transcription')
+    text.innerHTML = data.data || ''
   }
 });
