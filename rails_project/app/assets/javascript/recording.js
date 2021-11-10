@@ -1,3 +1,6 @@
+var textInterval = null;
+var fullTranscription = "";
+
 const initSaveVideo = () => {
   let test = sessionStorage.getItem("derp");
   // let test = sessionStorage.getItem("derp");
@@ -75,6 +78,8 @@ const initRecordVideo = () => {
       isRecording = !isRecording;
       start.style.background = "#0000FF";
       start.textContent = "Start"
+      // stop intervals
+      textInterval && clearInterval(textInterval)
       // TODO: POST to recording#create to save the video
       fetch('http://localhost:3000/recording/',{method:"POST", redirect: 'follow'})
       .then(response => {
@@ -91,8 +96,6 @@ const initRecordVideo = () => {
 
     } else {
       isRecording = !isRecording;
-      start.style.background = "#FF0000";
-      start.textContent = "Stop"
 
       streamObj.then(() => startRecording(live.captureStream()))
         .then(recordedChunks => {
@@ -102,8 +105,32 @@ const initRecordVideo = () => {
           // var bbUrl = URL.createObjectURL(recordedBlob);
           // sessionStorage.setItem("derp",bbUrl);
         })
+      
+      var startTime = dayjs('2018-04-04T16:00:00.000Z')
+      var count = 1;
+      const text = document.getElementById('transcription')
+      text.innerHTML = `00:00:00,000 --> 00:00:10,000: \n`
+
+      start.style.background = "#FF0000";
+      start.textContent = "Stop"
+
+      //Every 10 seconds, we take the transcription, add it somewhere, then clear the transcription
+      textInterval = setInterval(() => {
+        const text = document.getElementById('transcription')
+        const startIntervalTime = startTime.add(count * 10,'second')
+        count += 1;
+        const endIntervalTime = startTime.add(count * 10,'second')
+        //TODO: add to some other text stored somewhere
+        // if (count > 1){
+        //   fullTranscription += count + '\n' + text.innerHTML + '\n'
+        // }
+        text.innerHTML += `\n ${startIntervalTime.format('HH:mm:ss,SSS')} --> ${endIntervalTime.format('HH:mm:ss,SSS')}: \n`
+        text.scrollTop = text.scrollHeight
+      }, (10000));
     }
   }
+
+  
 
   const saveFile = (blob) => {
     console.log("SAVING");

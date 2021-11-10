@@ -51,7 +51,15 @@ App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
     // Called when there's incoming data on the websocket for this channel
     console.log('this is clientside receiving something')
     console.log(data)
-    const text = document.getElementById('transcription')
-    text.innerHTML = data.data || ''
+    //data comes in every 1second
+    const start = document.getElementById('start')
+    // we are currently recording...
+    if(start.textContent === 'Stop'){
+      const text = document.getElementById('transcription')
+      const lastText = text.innerHTML.split(' ')
+      if(lastText.at(-2) !== data.data){
+        text.innerHTML = text.innerHTML + (data.data ? data.data + ' ' : '')
+      }
+    }
   }
 });

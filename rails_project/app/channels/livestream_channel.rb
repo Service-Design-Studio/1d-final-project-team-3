@@ -10,7 +10,7 @@ class LivestreamChannel < ApplicationCable::Channel
   @@ENDPOINT_ID="8113384262289326080"
   @@PROJECT_ID="1055029069246"
   @@LOCATION="us-central1"
-  @@URI=URI.parse("https://us-central1-aiplatform.googleapis.com/v1/projects/#{@@PROJECT_ID}/locations/#{@@LOCATION}/endpoints/#{@@ENDPOINT_ID}:predict")
+  @@URI="https://us-central1-aiplatform.googleapis.com/v1/projects/#{@@PROJECT_ID}/locations/#{@@LOCATION}/endpoints/#{@@ENDPOINT_ID}:predict"
   @@ServiceAccount = ServiceAccountHelper.instance
   
   def subscribed
@@ -27,7 +27,7 @@ class LivestreamChannel < ApplicationCable::Channel
     p "RECEIVED SOCKET DATA"
     begin
       p "DECODE DATA"
-      payload = self.create_payload(data["data"])
+      payload = self.create_payload(img64:data["data"])
 
       p "sending data"
       response = self.send_request payload:payload
@@ -71,21 +71,27 @@ class LivestreamChannel < ApplicationCable::Channel
     #   response
       token = "Bearer #{@@ServiceAccount.token["access_token"]}"
       header = {"Content-Type":"application/json", "Authorization":token}
-      RestClient.post(url, payload, headers=header)
+      RestClient.post(@@URI, payload, headers=header)
     rescue => exception
       p exception
+    end
   end
 
-  def create_payload(img64:, confidence_threshold:0.9, max_predictions:1)
-    # request.body = {
-    #     "instances":[{
-    #       "content": image_bytes
-    #     }]
-    #     }.to_json
-    content = [{"content": img64}]
-    params = {"confidenceThreshold":confidence_threshold, "maxPredictions":max_predictions}
-    payload = {"instances":content, "parameters":params}
-    File.write('./sample_payload.json', JSON.dump(payload))
-    inp_obj = JSON.generate(payload)
+  def create_payload(img64:, confidence_threshold:0.3, max_predictions:1)
+    payload = {
+        "instances":[{
+          "content": img64
+        }],
+        "parameters": {
+          "confidenceThreshold": confidence_threshold,
+          "maxPredictions": max_predictions
+        }
+      }.to_json
+        
+    # content = [{"content": img64}]
+    # params = {"confidenceThreshold":confidence_threshold, "maxPredictions":max_predictions}
+    # payload = {"instances":content, "parameters":params}
+    # File.write('./sample_payload.json', JSON.dump(payload))
+    # payload
   end
 end
