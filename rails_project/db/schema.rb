@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_11_08_140915) do
 
   create_table "recordings", force: :cascade do |t|
+    t.integer "video_id"
     t.date "date"
     t.string "title"
     t.float "duration"

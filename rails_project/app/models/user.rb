@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-    has_many :video_ids
+    # has_many :recordings
 end

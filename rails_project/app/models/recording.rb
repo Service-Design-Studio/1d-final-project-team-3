@@ -1,3 +1,3 @@
 class Recording < ApplicationRecord
-    has_one :username
+    # belongs_to :user
 end
