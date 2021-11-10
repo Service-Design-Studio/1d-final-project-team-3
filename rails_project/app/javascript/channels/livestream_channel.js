@@ -12,20 +12,32 @@ App.appearance = App.cable.subscriptions.create("LivestreamChannel", {
       video.addEventListener('playing',(evt)=>{
         console.log("LIVESTREAM IS FETCHING DATA",evt.target.captureStream())
         const mediaStream = evt.target.captureStream()
-        const mediaRecorder = new MediaRecorder(mediaStream)
-        mediaRecorder.ondataavailable = event => {
-          //here, event.data is a blob of the image.
-          var reader = new FileReader();
-          reader.readAsDataURL(event.data); 
-          reader.onloadend = function() {
-            var base64data = reader.result; 
-            console.log("SENDING DATA NOW")
-            // App.appearance.send({data: "WEEEEEE"})
-            App.appearance.send({data : base64data})
-          }
-        };
-        // this argument inside .start() is the interval to send (in ms)
-        mediaRecorder.start(5000)
+        // TEMPORARY FOR IMAGE GRABBING
+        const track = mediaStream.getVideoTracks()[0];
+        const imageCapture = new ImageCapture(track);
+        setInterval(()=>{
+          imageCapture.grabFrame().then(
+            (imageBitmap)=>{
+              let canvas = document.createElement('canvas')
+              canvas.getContext('bitmaprenderer').transferFromImageBitmap(imageBitmap)
+              let base64data = canvas.toDataURL().slice(22)
+              App.appearance.send({data : base64data})
+          })
+        },5000)
+        // const mediaRecorder = new MediaRecorder(mediaStream,{mimeType:"image/jpeg"})
+        // mediaRecorder.ondataavailable = event => {
+        //   //here, event.data is a blob of the image.
+        //   var reader = new FileReader();
+        //   reader.readAsDataURL(event.data); 
+        //   reader.onloadend = function() {
+        //     var base64data = reader.result; 
+        //     console.log("SENDING DATA NOW")
+        //     // App.appearance.send({data: "WEEEEEE"})
+        //     App.appearance.send({data : base64data})
+        //   }
+        // };
+        // // this argument inside .start() is the interval to send (in ms)
+        // mediaRecorder.start(5000)
       })
     }
   },
