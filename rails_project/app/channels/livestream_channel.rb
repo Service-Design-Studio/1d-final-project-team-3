@@ -31,7 +31,7 @@ class LivestreamChannel < ApplicationCable::Channel
   #   end
   
   def subscribed
-    # stream_from "some_channel"
+    stream_from "LivestreamChannel"
   end
 
   def unsubscribed
@@ -41,56 +41,47 @@ class LivestreamChannel < ApplicationCable::Channel
 
   def receive(data)
     # Data here is received as a base64 encoded blob.
-    p "RECEIVED SOCKET DATA"
     begin
-      p "DECODE DATA"
       image_bytes = data["data"]
 
-      p "sending data"
       response = self.create_request image_bytes
 
-      p response.body
-    rescue => exception
-      puts ("EXCEPTION")
-      # puts(exception)
-    end
+      data = JSON.parse(response.body)
 
+      # Get display name
+      p data["predictions"][0]["displayNames"][0]
+    rescue => exception
+      puts(exception)
+    end
+    begin
+      ActionCable.server.broadcast("LivestreamChannel",{"data" => data["predictions"][0]["displayNames"][0]})
+    rescue=> exception
+      puts exception
+    end
     # TODO: send data back to client.
   end
 
   def create_request(image_bytes)
     # Create a request. To set request fields, pass in keyword arguments.
     begin
-      p "creating http"
       http = Net::HTTP.new(@@uri.host, @@uri.port)
       http.use_ssl = true
-      p "creating request"
       request = Net::HTTP::Post.new(@@uri.request_uri)
-      p "setting headers"
-    #   request.initialize_http_header(
-    #     "Authorization" => "Bearer #{@@ServiceAccount.token["access_token"]}",
-    #     "Content-Type" => "application/json"
-    #  )
       request["Authorization"] = "Bearer #{@@ServiceAccount.token["access_token"]}"
       request["Content-Type"] = "application/json"
       request["User-Agent"] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36'
-      p request['Authorization']
-      p "forming request body"
       request.body = {
         "instances":[{
           "content": image_bytes
         }],
         "parameters": {
-          "confidenceThreshold": 0.1,
+          "confidenceThreshold": 0.3,
           "maxPredictions": 1
         }      
         }.to_json
-      p 'sending request'
       response = http.request(request)
-      p 'getting response'
       response
     rescue => exception
-      p ("EXCEPTION")
       p exception
     end
   end
