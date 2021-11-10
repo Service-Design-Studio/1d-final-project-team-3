@@ -2,16 +2,17 @@ require "google/cloud/automl/v1"
 require "base64"
 require "json"
 require "rest-client"
+require 'uri'
+require 'net/http'
 
 class LivestreamChannel < ApplicationCable::Channel
-  #PBY's alphabet handsign ML model details
-  @@PROJECT_ID="1075614731933"
-  @@ENDPOINT_ID="3042331081870147584"
+  include ServiceAccountHelper
+  @@ENDPOINT_ID="8113384262289326080"
+  @@PROJECT_ID="1055029069246"
   @@LOCATION="us-central1"
-  #this is hacky way of using my login
-  @@AUTH_TOKEN=%x/gcloud auth print-access-token/
+  @@URI=URI.parse("https://us-central1-aiplatform.googleapis.com/v1/projects/#{@@PROJECT_ID}/locations/#{@@LOCATION}/endpoints/#{@@ENDPOINT_ID}:predict")
+  @@ServiceAccount = ServiceAccountHelper.instance
   
-
   def subscribed
     # p "yo"
     # stream_from "livestream_channel"
@@ -24,25 +25,57 @@ class LivestreamChannel < ApplicationCable::Channel
 
   def receive(data)
     # Data here is received as a hash with a base64 encoded blob.
-    p "received data"
-
+    p "RECEIVED SOCKET DATA"
     begin
-      response = self.send_request json_obj:self.create_json(img64:data["data"])
+      p "DECODE DATA"
+      payload = self.create_payload(data["data"])
+
+      p "sending data"
+      response = self.send_request payload:payload
+
       p response.body
     rescue => exception
-      p exception
+      puts ("EXCEPTION")
+      # puts(exception)
     end
   end
 
-  def send_request(json_obj:)
-    url = "https://us-central1-aiplatform.googleapis.com/v1/projects/#{@@PROJECT_ID}/locations/#{@@LOCATION}/endpoints/#{@@ENDPOINT_ID}:predict"
-    token = "Bearer " + @@AUTH_TOKEN
-    # p token
-    header = {"Content-Type":"application/json", "Authorization":token}
-    RestClient.post(url, json_obj, headers=header)
+  def send_request(payload:)
+    begin
+    #   p "creating http"
+    #   http = Net::HTTP.new(@@uri.host, @@uri.port)
+    #   http.use_ssl = true
+    #   p "creating request"
+    #   request = Net::HTTP::Post.new(@@uri.request_uri)
+    #   p "setting headers"
+    # #   request.initialize_http_header(
+    # #     "Authorization" => "Bearer #{@@ServiceAccount.token["access_token"]}",
+    # #     "Content-Type" => "application/json"
+    # #  )
+    #   request["Authorization"] = "Bearer #{@@ServiceAccount.token["access_token"]}"
+    #   request["Content-Type"] = "application/json"
+    #   request["User-Agent"] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36'
+    #   p request['Authorization']
+    #   p "forming request body"
+      
+    #   p 'sending request'
+    #   response = http.request(request)
+    #   p 'getting response'
+    #   response
+      token = "Bearer #{@@ServiceAccount.token["access_token"]}"
+      header = {"Content-Type":"application/json", "Authorization":token}
+      RestClient.post(url, payload, headers=header)
+    rescue => exception
+      p ("EXCEPTION")
+      p exception
   end
 
-  def create_json(img64:, confidence_threshold:0.7, max_predictions:1)
+  def create_payload(img64:, confidence_threshold:0.9, max_predictions:1)
+    # request.body = {
+    #     "instances":[{
+    #       "content": image_bytes
+    #     }]
+    #     }.to_json
     content = [{"content": img64}]
     params = {"confidenceThreshold":confidence_threshold, "maxPredictions":max_predictions}
     payload = {"instances":content, "parameters":params}
@@ -50,39 +83,3 @@ class LivestreamChannel < ApplicationCable::Channel
     inp_obj = JSON.generate(payload)
   end
 end
-
-# @@AUTOML_CLIENT=Google::Cloud::AutoML::V1::PredictionService::Client.new do |config|
-  #     config.credentials = "#{__dir__}/sds-final-project-team-3-95b5816a9039.json"
-  #     # config.endpoint = "https://us-central1-aiplatform.googleapis.com/v1/projects/#{PROJECT_ID}/locations/us-central1/endpoints/#{ENDPOINT_ID}:predict"
-  #   end
-
-# begin
-    #   p "DECODE DATA"
-    #   image_bytes = Base64.decode64 data["data"]
-
-    #   p "calling create req func"
-    #   request = self.create_request image_bytes
-    #   p "SENDING REQUEST"
-    #   result = @@AUTOML_CLIENT.predict request
-    #   p result.type
-
-    # rescue => exception
-    #   puts(exception)
-    # end
-
-    # TODO: send data back to client.
-
-# def create_request(image_bytes)
-  #   Create a request. To set request fields, pass in keyword arguments.
-  #   begin
-  #     p "creating request problem"
-  #     image_obj = Google::Cloud::AutoML::V1::Image.new image_bytes:image_bytes
-  #     payload = Google::Cloud::AutoML::V1::ExamplePayload.new image:image_obj
-  #     full_model_path = Google::Cloud::AutoML::V1::PredictionService::Paths.model_path project:@@PROJECT_ID, location:@@LOCATION, model:@@MODEL_ID
-
-  #     p "forming request object"
-  #     request = Google::Cloud::AutoML::V1::PredictRequest.new name:full_model_path, payload:payload
-  #   rescue => exception
-  #     p exception
-  #   end
-  # end
