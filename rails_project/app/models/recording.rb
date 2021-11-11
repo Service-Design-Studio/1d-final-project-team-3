@@ -1,3 +1,3 @@
 class Recording < ApplicationRecord
-    # belongs_to :user
+  has_one_attached :video_file
 end
