@@ -13,6 +13,7 @@ import {initRecordVideo, initSaveVideo} from "Recording"
 //= require turbolinks
 //= require_tree .
 window.onload = () => initRecordVideo();
+
 // window.onload = () => initSaveVideo();
 // window.onbeforeunload = () => RecordVideo().stopVideo;
 
