@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # get '/recording', to 'recording#index', as: 'recording_path' 
   
   # #Live Recording Page
-  # post '/recording/create', to 'recording#create', as: 'create_recording_path'
+  # post '/recording/new', to 'recording#create', as: 'create_recording_path'
   # get '/recording/new', to 'recording#new', as: 'new_recording_path'
 
   # #Edit Recording Page
@@ -16,12 +16,10 @@ Rails.application.routes.draw do
   # delete '/recording/:id', to 'recording#destroy', as: 'destroy_recording_path'
   
   resources :recording
-  
   #Home page
-  get '/', to: 'home#index', as: 'home_path'
-  root 'home#index'
-  
-  # mount ActionCable.server => '/recording/index'
+  # get '/', to: 'home#index', as: 'home'
+  root 'home#index', as: 'home'
+  # post 'recording/new', to 'recording#create', as: 'create_recording_path'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -227,6 +227,8 @@ GEM
     multipart-post (2.1.1)
     netrc (0.11.0)
     nio4r (2.5.8)
+    nokogiri (1.12.5-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.12.5-x64-mingw32)
       racc (~> 1.4)
     os (1.1.4)
@@ -298,6 +300,8 @@ GEM
     rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     sassc (2.4.0-x64-mingw32)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -328,9 +332,10 @@ GEM
       ffi (~> 1.1)
     thor (1.1.0)
     tilt (2.0.10)
+    trailblazer-option (0.1.2)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    tzinfo-data (1.2021.4)
+    tzinfo-data (1.2021.5)
       tzinfo (>= 1.0.0)
     unf (0.1.4)
       unf_ext
@@ -358,6 +363,7 @@ GEM
     zeitwerk (2.5.0)
 
 PLATFORMS
+  arm64-darwin-20
   x64-mingw32
 
 DEPENDENCIES
