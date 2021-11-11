@@ -20,22 +20,6 @@ import {initRecordVideo, initSaveVideo} from "../Recording/index";
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
-window.onload = () => initRecordVideo();
-$('tr').click(function() {
-    alert("table row clicked")
-    //window.document.location = $(this).data("link")
-    windows.location.href = edit_recording_path(record)
-  });
-
-// window.onload = () => initSaveVideo();
-// window.onbeforeunload = () => RecordVideo().stopVideo;
 
 Rails.start();
 ActiveStorage.start();
-
-// document.addEventListener('turbolinks:load', () => {
-//     if(document.querySelector("#live")) {
-//       initRecordVideo();
-//     }
-//   });
-
