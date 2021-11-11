@@ -1,0 +1,20 @@
+<%= javascript_include_tag 'recording.js' %>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+
+<script>
+  window.onload = () => initRecordVideo();
+  window.onbeforeunload = () => RecordVideo().stopVideo;
+</script>
+
+<%= render "shared/nav" %>
+<div class='padding-sm'>
+    <video style="border: 1px solid black" id="live" width="300"></video>
+</div>
+<div class='padding-sm'>
+  <textarea readonly id='transcription' class="transcription-box" ></textarea>
+  <%# <TextBox id='transcription1' readonly></TextBox> %>
+<div class='padding-sm'>
+    <button id="start", class="btn btn-primary btn-lg btn-block margin-top-md width-max">Start</button>
+</div>
+<%= render "form", recording: @recording %>
+
