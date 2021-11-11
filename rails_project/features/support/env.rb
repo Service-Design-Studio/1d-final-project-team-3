@@ -5,6 +5,8 @@
 # files.
 
 require 'cucumber/rails'
+require 'capybara'
+Capybara.default_driver = :selenium_chrome
 
 # frozen_string_literal: true
 

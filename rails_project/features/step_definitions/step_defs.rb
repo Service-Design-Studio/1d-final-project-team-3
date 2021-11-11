@@ -11,3 +11,7 @@ end
 Then('I should see {string} button') do |buttonName|
     expect(page).to have_button buttonName
 end
+
+When('I click on the {string} button') do |buttonName|
+    click_button 'Start'
+end
