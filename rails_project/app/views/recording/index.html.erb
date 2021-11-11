@@ -8,15 +8,17 @@
       <th scope="col">Index</th>
       <th scope="col">Title</th>
       <th scope="col">Date</th>
+      <th scope="col">Edit</th>
     </tr>
   </thead>
 
   <tbody>
     <% @recordings.each do |record| %>
       <tr class='clickable-row' data-link="<%= edit_recording_path(record)%>"> 
-        <td><%= record.user_id %></td>
+        <td><%= record.id %></td>
         <td><%= record.title %></td>
         <td><%= record.date %></td>
+        <td><%=link_to 'Edit', edit_recording_path(record)%></td>
       </tr>
     <% end %>
   </tbody>

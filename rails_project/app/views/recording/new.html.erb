@@ -1,8 +1,11 @@
 <%= render "shared/nav" %>
 <div class='padding-sm'>
-    <video style="border: 1px solid black" id="live" width="300"></video>
+    <video style="border: 1px solid black" id="live" width="300" autoplay></video>
 </div>
 <div class='padding-sm'>
-    <button id="start", class="btn btn-primary btn-lg btn-block margin-top-md width-max">Start</button>    
-    <%= button_to 'Save Video', '../recording', method: "post",class:"btn btn-primary btn-lg btn-block margin-top-md width-max" =%>
+    <button id="start", class="btn btn-primary btn-lg btn-block margin-top-md width-max">Start</button> 
 </div>
+    <%# <button id="stop", class="btn btn-primary btn-lg btn-block margin-top-md width-max">Stop</button>     %>
+
+    <%# <%= button_to 'Save Video', { action: "create" }, class:"btn btn-primary btn-lg btn-block margin-top-md width-max" %>
+<%= render "form", recording: @recording %>
