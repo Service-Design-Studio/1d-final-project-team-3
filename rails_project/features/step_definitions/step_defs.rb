@@ -15,3 +15,19 @@ end
 When('I click on the {string} button') do |buttonName|
     click_button 'Start'
 end
+
+When 'I am signing a handsign' do
+    
+end
+
+Then 'I should see an English transcription of the handsign' do
+
+end
+
+Given 'I am already recording a video with transcription' do
+    
+end
+
+Then 'I should be brought to the {string} section of {string} page' do
+    expect(current_path).to eq "recording/edit"
+end
