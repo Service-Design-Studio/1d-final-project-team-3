@@ -8,6 +8,14 @@ Then('I should see a video screen') do
     expect(page).to have_xpath '//*[@id="live"]'
 end
 
+Then('I should see a logs table') do
+    expect(page).to have_css 'table'
+end
+
+And('I should see 'Title', 'Date' and 'Edit'') do
+    expect(page).to have_text('Title', 'Date', 'Edit')
+end
+
 Then('I should see {string} button') do |buttonName|
     expect(page).to have_button buttonName
 end
