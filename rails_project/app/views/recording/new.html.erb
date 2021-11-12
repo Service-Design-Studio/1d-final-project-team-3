@@ -1,20 +1,19 @@
-<%= javascript_include_tag 'recording.js' %>
+<%= javascript_pack_tag 'recording_new.js' %>
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 
-<script>
-  window.onload = () => initRecordVideo();
-  window.onbeforeunload = () => RecordVideo().stopVideo;
-</script>
 
 <%= render "shared/nav" %>
 <div class='padding-sm'>
-    <video style="border: 1px solid black" id="live" width="300"></video>
+    <video style="border: 1px solid black" id="video-player" width="300"></video>
 </div>
 <div class='padding-sm'>
   <textarea readonly id='transcription' class="transcription-box" ></textarea>
   <%# <TextBox id='transcription1' readonly></TextBox> %>
 <div class='padding-sm'>
-    <button id="start", class="btn btn-primary btn-lg btn-block margin-top-md width-max">Start</button>
+    <button id="control-button" data-isRecording=false class="btn btn-primary btn-lg btn-block margin-top-md width-max">Start</button>
 </div>
-<%= render "form", recording: @recording %>
+<form enctype="multipart/form-data" id="video-form" action="/recording" accept-charset="UTF-8" method="post">
+  <input type="hidden" id="token" name="authenticity_token" value=<%=form_authenticity_token%>>
+  <input type="video" hidden name="recording[video_file]" id="recording-video-file">
+</form>
 

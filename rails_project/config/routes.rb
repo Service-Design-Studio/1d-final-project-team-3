@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # #Recording logs page
   # get '/recording', to 'recording#index', as: 'recording_path' 
   
@@ -14,12 +13,9 @@ Rails.application.routes.draw do
   # #Individual Recording Page
   # get 'recording/:id', to 'recording#show', as: 'show_recording_path'
   # delete '/recording/:id', to 'recording#destroy', as: 'destroy_recording_path'
-  
   resources :recording
+
   #Home page
   # get '/', to: 'home#index', as: 'home'
   root 'home#index', as: 'home'
-  # post 'recording/new', to 'recording#create', as: 'create_recording_path'
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -11,7 +11,7 @@ class RecordingController < ApplicationController
 
   def create
 
-
+    puts('THE CREATES ENDPOINT IS BEING HIT')
     @recording = Recording.new(recording_params)
     @recording.save 
     @recording.video_file.attach(params[:video_file])
@@ -22,8 +22,8 @@ class RecordingController < ApplicationController
     end 
     # flash[:id]
     # puts(params[:id])
-    puts('THE CREATES ENDPOINT IS BEING HIT')
     redirect_to home_path
+    # render :js => "window.location = '/recording/edit'"
     # redirect_to edit_recording_path 
   end
 
@@ -43,7 +43,7 @@ class RecordingController < ApplicationController
 
   private 
     def  recording_params
-      params.require(:recording).permit(:id, :video_file)
+      params.require(:recording).permit(:video_file)
     end 
 
     def upload

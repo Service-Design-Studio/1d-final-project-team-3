@@ -1,9 +1,9 @@
-require "google/cloud/automl/v1"
+# require "google/cloud/automl/v1"
 require "base64"
 require "json"
 require "rest-client"
-require 'uri'
-require 'net/http'
+# require 'uri'
+# require 'net/http'
 
 class LivestreamChannel < ApplicationCable::Channel
   include ServiceAccountHelper
@@ -27,48 +27,28 @@ class LivestreamChannel < ApplicationCable::Channel
     p "RECEIVED SOCKET DATA"
     begin
       p "DECODE DATA"
-      payload = self.create_payload(img64:data["data"])
+      payload = self.create_payload(img64:data["data"], confidence_threshold:0.5, max_predictions:1)
 
       p "sending data"
       response = self.send_request payload:payload
-
       data = JSON.parse(response.body)
 
       # Get display name
-      p data["predictions"][0]["displayNames"][0]
+      p data["predictions"][0]
     rescue => exception
       puts(exception)
     end
+
+    #Sending transcription data back
     begin
       ActionCable.server.broadcast("LivestreamChannel",{"data" => data["predictions"][0]["displayNames"][0]})
     rescue=> exception
       puts exception
     end
-    # TODO: send data back to client.
   end
 
   def send_request(payload:)
     begin
-    #   p "creating http"
-    #   http = Net::HTTP.new(@@uri.host, @@uri.port)
-    #   http.use_ssl = true
-    #   p "creating request"
-    #   request = Net::HTTP::Post.new(@@uri.request_uri)
-    #   p "setting headers"
-    # #   request.initialize_http_header(
-    # #     "Authorization" => "Bearer #{@@ServiceAccount.token["access_token"]}",
-    # #     "Content-Type" => "application/json"
-    # #  )
-    #   request["Authorization"] = "Bearer #{@@ServiceAccount.token["access_token"]}"
-    #   request["Content-Type"] = "application/json"
-    #   request["User-Agent"] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36'
-    #   p request['Authorization']
-    #   p "forming request body"
-      
-    #   p 'sending request'
-    #   response = http.request(request)
-    #   p 'getting response'
-    #   response
       token = "Bearer #{@@ServiceAccount.token["access_token"]}"
       header = {"Content-Type":"application/json", "Authorization":token}
       RestClient.post(@@URI, payload, headers=header)
@@ -77,7 +57,7 @@ class LivestreamChannel < ApplicationCable::Channel
     end
   end
 
-  def create_payload(img64:, confidence_threshold:0.3, max_predictions:1)
+  def create_payload(img64:, confidence_threshold:0, max_predictions:1)
     payload = {
         "instances":[{
           "content": img64
@@ -87,11 +67,5 @@ class LivestreamChannel < ApplicationCable::Channel
           "maxPredictions": max_predictions
         }
       }.to_json
-        
-    # content = [{"content": img64}]
-    # params = {"confidenceThreshold":confidence_threshold, "maxPredictions":max_predictions}
-    # payload = {"instances":content, "parameters":params}
-    # File.write('./sample_payload.json', JSON.dump(payload))
-    # payload
   end
 end

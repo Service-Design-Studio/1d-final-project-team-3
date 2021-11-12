@@ -23,7 +23,7 @@ google:
 google:
   service: GCS
   project: 1d-final-project-team3
-  credentials: <%= Rails.root.join("gcs.keyfile") %>
+  credentials: <%= Rails.root.join("keys/gcs.keyfile") %>
   bucket: team3_videos_bucket_1
 
 # Use rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)

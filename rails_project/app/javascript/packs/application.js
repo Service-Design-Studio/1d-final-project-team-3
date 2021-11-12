@@ -14,7 +14,6 @@
 import Rails from "@rails/ujs";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
-import {initRecordVideo, initSaveVideo} from "../Recording/index";
 //= require rails-ujs
 //= require jquery
 //= require bootstrap-sprockets
