@@ -7,8 +7,11 @@ require "rest-client"
 
 class LivestreamChannel < ApplicationCable::Channel
   include ServiceAccountHelper
-  @@ENDPOINT_ID="8113384262289326080"
-  @@PROJECT_ID="1055029069246"
+  ## Gab model's endpoint
+  # @@ENDPOINT_ID="8113384262289326080"
+  # @@PROJECT_ID="1055029069246"
+  @@ENDPOINT_ID="926202206959435776"
+  @@PROJECT_ID="858374279331"
   @@LOCATION="us-central1"
   @@URI="https://us-central1-aiplatform.googleapis.com/v1/projects/#{@@PROJECT_ID}/locations/#{@@LOCATION}/endpoints/#{@@ENDPOINT_ID}:predict"
   @@ServiceAccount = ServiceAccountHelper.instance
