@@ -44,7 +44,6 @@ class LivestreamChannel < ApplicationCable::Channel
     rescue=> exception
       puts exception
     end
-    # TODO: send data back to client.
   end
 
   def send_request(payload:)
@@ -71,6 +70,8 @@ class LivestreamChannel < ApplicationCable::Channel
     #   response
       token = "Bearer #{@@ServiceAccount.token["access_token"]}"
       header = {"Content-Type":"application/json", "Authorization":token}
+      p 'BEFORE POSTING'
+      p token
       RestClient.post(@@URI, payload, headers=header)
     rescue => exception
       p exception

@@ -81,12 +81,6 @@ const initRecordVideo = () => {
       // stop intervals
       textInterval && clearInterval(textInterval)
       // TODO: POST to recording#create to save the video
-      fetch('http://localhost:3000/recording/',{method:"POST", redirect: 'follow'})
-      .then(response => {
-        if (response.redirected) {
-            window.location.href = response.url;
-        }
-    })
 
       // xhr.setRequestHeader('Content-Type', 'application/json');
       // xhr.send(JSON.stringify({
@@ -135,10 +129,45 @@ const initRecordVideo = () => {
   const saveFile = (blob) => {
     console.log("SAVING");
     console.log(blob);
-    var blobUrl = URL.createObjectURL(blob);
-    link.href = blobUrl;
-    link.download = "video.webm";
-    link.click();
+    var reader = new FileReader();
+    reader.readAsDataURL(blob); 
+    reader.onloadend = function() {
+      var base64data = reader.result;
+      const payload = JSON.stringify({'video_file': base64data})
+      var fd = new FormData();
+      fd.append('recording', payload);
+      jQuery.ajax({
+        type: 'POST',
+        url: '/recording',
+        data: fd,
+        dataType:'json',
+        processData: false,
+        contentType: false,
+        success: function(data, textStatus) {
+          console.log(data)
+          if (data.redirect) {
+              // data.redirect contains the string URL to redirect to
+              window.location.href = data.redirect;
+          }
+      }  
+      })
+    }
+        
+    // link.href = blobUrl;
+    // link.download = "video.webm";
+    //SAVE RECORDING
+    // fetch('http://localhost:3000/recording/',{
+    //   method:"POST",
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Access-Control-Allow-Origin': '*'
+    //   },
+    //   body:JSON.stringify({
+    //     id:1,
+    //     video_file: blob,
+    //     title:'test'
+    //     })
+    //   })
   }
 
   start.addEventListener("click", btnOnClick);

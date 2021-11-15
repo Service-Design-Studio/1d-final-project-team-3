@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   # delete '/recording/:id', to 'recording#destroy', as: 'destroy_recording_path'
   
   resources :recording
+  # resources: users do 
   #Home page
   # get '/', to: 'home#index', as: 'home'
   root 'home#index', as: 'home'
