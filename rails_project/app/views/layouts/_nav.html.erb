@@ -1,0 +1,22 @@
+<!-- Navbar start -->
+<nav class="navbar navbar-light bg-light padding-sm">
+  <span class="mb-0 display-4">Recording</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+</nav>
+<div class="collapse navbar-collase" id="navbarToggleExternalContent">
+    <div class='child-component text-right'>
+        <ul  class="navbar-nav mr-auto float-right h2">
+          <li class="nav-item active"></li>
+            <%= link_to 'Home', home_path %>
+            <%= link_to 'Records', recording_index_path %>
+          </li>
+          <li class="nav-item active margin-top-md"></li>
+            <%= link_to 'Log Out','#' %>
+          </li>
+        </ul>
+    </div>
+</div>
+<!-- Navbar end -->
