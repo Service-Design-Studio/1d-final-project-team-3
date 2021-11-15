@@ -1,3 +1,6 @@
+#Google Key files
+*.keyfile
+
 ### Linux ###
 *~
 
