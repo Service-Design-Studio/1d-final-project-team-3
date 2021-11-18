@@ -9,19 +9,19 @@ Then('I should see a video screen') do
 end
 
 Then('I should see a logs table') do
-    expect(page).to have_css 'table'
+    expect(page).to have_table
 end
 
-And('I should see 'Title', 'Date' and 'Edit'') do
+And('I should see Title, Date and Edit') do
     expect(page).to have_text('Title', 'Date', 'Edit')
 end
 
 Then('I should see {string} button') do |buttonName|
-    expect(page).to have_button buttonName
+    expect(page).to click_link_or_button buttonName
 end
 
 When('I click on the {string} button') do |buttonName|
-    click_button 'Start'
+    click_button buttonName
 end
 
 When 'I am signing a handsign' do
@@ -38,4 +38,16 @@ end
 
 Then 'I should be brought to the {string} section of {string} page' do
     expect(current_path).to eq "recording/edit"
+end
+
+Given 'that I am on login page' do
+    expect(page).to have_text('Log In with Google')
+end
+
+When 'I click on {string}' do |link|
+    click_link link
+end
+
+Then 'I should see google oAuth login screen'
+    expect(page).to have_text('sds-txt-app')
 end

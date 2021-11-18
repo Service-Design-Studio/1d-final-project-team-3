@@ -14,3 +14,5 @@ Feature: To have a transcription of the video recording of the sign language con
     Given that I am already recording a video with transcription
     When I click on the "Stop" button
     Then I should be brought to the "edit" section of "recording" page
+
+    #combine w record.feature
