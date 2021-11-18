@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    # has_many :recordings
+    has_many :recordings
     validates :username, :email, presence: true
     validates :username, :email, uniqueness: true
 

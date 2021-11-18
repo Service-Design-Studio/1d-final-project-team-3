@@ -8,7 +8,7 @@ function initRecordVideo(){
   const player = document.getElementById("video-player")
   const text = document.getElementById('transcription')
   const form = document.getElementById('video-form')
-  const token = document.getElementById('token')
+  // const token = document.getElementById('token')
   var textInterval = null
   var streamInterval = null
   const streamObj = startVideo()

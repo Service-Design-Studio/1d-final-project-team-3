@@ -12,9 +12,13 @@ class RecordingController < ApplicationController
   def create
 
     puts('THE CREATES ENDPOINT IS BEING HIT')
+    # params[:user_id] = current_user
+    # p recording_params
     @recording = Recording.new(recording_params)
-    @recording.save 
+    p session[:user_id].class
+    @recording.user_id = session[:user_id]
     @recording.video_file.attach(params[:video_file])
+    @recording.save
     if (@recording.video_file.attached?)
       puts('ATTACHED')
     else 
