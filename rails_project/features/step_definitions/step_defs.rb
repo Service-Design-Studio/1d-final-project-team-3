@@ -13,11 +13,19 @@ Then('I should see a logs table') do
 end
 
 And('I should see Title, Date and Edit') do
-    expect(page).to have_text('Title', 'Date', 'Edit')
+    within('table') do
+        expect(page).to have_xpath(".//th", :count => 4)
+    end
 end
 
-Then('I should see {string} button') do |buttonName|
-    expect(page).to click_link_or_button buttonName
+And('I should see {string} button') do |buttonName|
+    expect(page).to have_button buttonName
+end
+
+When('I click on "Edit" column') do
+    within('table') do
+        click_link "Edit"
+    end
 end
 
 When('I click on the {string} button') do |buttonName|
@@ -36,8 +44,8 @@ Given 'I am already recording a video with transcription' do
     
 end
 
-Then 'I should be brought to the {string} section of {string} page' do
-    expect(current_path).to eq "recording/edit"
+Then 'I should be brought to the {string} section of {string} page' do |action,controller|
+    expect(current_path).to eq "/#{controller}/#{action}"
 end
 
 Given 'that I am on login page' do
@@ -70,4 +78,8 @@ end
 
 Then 'I should see the Google enter password page' do
     expect(page).to have_text('Welcome')
+end
+
+Given 'that I am on the "Recording Logs" page' do
+    visit "/recording"
 end

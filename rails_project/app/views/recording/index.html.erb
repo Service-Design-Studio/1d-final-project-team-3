@@ -18,7 +18,7 @@
         <td><%= record.id %></td>
         <td><%= record.title %></td>
         <td><%= record.date %></td>
-        <td><%=link_to 'Edit', edit_recording_path(record)%></td>
+        <td><%=button_to 'Edit', edit_recording_path(record)%></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  skip_before_action :require_login, only: [:new, :googleAuth]
+  skip_before_action :require_login, only: [:new, :googleAuth, :index]
 
   def index
     @user = current_user
