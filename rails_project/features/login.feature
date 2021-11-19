@@ -8,9 +8,10 @@ Feature: Log in with google account.
     Scenario: Redirect to oAuth screen
         Given that I am on login page
         When I click on 'Log In with Google'
-        Then I should see "View Past Recordings"
+        Then I should see google oAuth login screen
 
     Scenario: fill in credentials
-        Given that I am on login page
-        When I click on 'Log In with Google'
-        Then I should see "View Past Recordings"
+        Given that I am on the Google login page
+        When I fill in my email
+        And I click on the next button
+        Then I should see the Google enter password page

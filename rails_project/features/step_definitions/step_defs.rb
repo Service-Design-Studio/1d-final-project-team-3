@@ -51,3 +51,19 @@ end
 Then 'I should see google oAuth login screen'
     expect(page).to have_text('sds-txt-app')
 end
+
+Given 'that I am on the Google login page' do
+    expect(page).to have_text('sds-txt-app')
+end
+
+When 'I fill in my email' do
+    fill_in 'input', :with => '1004413@sutd.edu'
+end
+
+And 'I click on the next button' do
+    
+end
+
+Then 'I should see the Google enter password page' do
+    
+end
