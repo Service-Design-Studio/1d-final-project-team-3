@@ -15,3 +15,6 @@ Feature: Log in with google account.
         When I fill in my email
         And I click on the next button
         Then I should see the Google enter password page
+        When I fill in my password
+        And I click on the next button
+        Then I should be brought to the "/" section of "user" page

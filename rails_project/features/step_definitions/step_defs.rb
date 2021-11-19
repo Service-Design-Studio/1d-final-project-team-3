@@ -41,29 +41,33 @@ Then 'I should be brought to the {string} section of {string} page' do
 end
 
 Given 'that I am on login page' do
-    expect(page).to have_text('Log In with Google')
+    visit 'http://localhost:3000/login'
 end
 
 When 'I click on {string}' do |link|
     click_link link
 end
 
-Then 'I should see google oAuth login screen'
-    expect(page).to have_text('sds-txt-app')
+Then 'I should see google oAuth login screen' do
+    expect(page).to have_selector('input')
 end
 
 Given 'that I am on the Google login page' do
-    expect(page).to have_text('sds-txt-app')
+    expect(page).to have_selector('input')
 end
 
 When 'I fill in my email' do
-    fill_in 'input', :with => '1004413@sutd.edu'
+    fill_in 'data-initial-value', :with => '1004413@sutd.edu.sg'
+end
+
+When 'I fill in my password' do
+    fill_in 'data-initial-value', :with => 'sutd1234'
 end
 
 And 'I click on the next button' do
-    
+    click_button "Next"
 end
 
 Then 'I should see the Google enter password page' do
-    
+    expect(page).to have_text('Welcome')
 end
