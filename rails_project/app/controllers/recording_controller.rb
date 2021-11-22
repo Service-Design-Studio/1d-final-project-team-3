@@ -18,7 +18,7 @@ class RecordingController < ApplicationController
     @recording = Recording.new(recording_params)
     p session[:user_id].class
     @recording.user_id = session[:user_id]
-    @recording.video_file.attach(params[:video_file])
+    @recording.video_file.attach(recording_params[:video_file])
     @recording.save
     if (@recording.video_file.attached?)
       puts('ATTACHED')
@@ -37,18 +37,25 @@ class RecordingController < ApplicationController
   end
 
   def edit
+    @recording = Recording.find(params[:id])
+    p @recording
   end
 
   def update
+    @recording = Recording.find(params[:id])
+    @recording.update(recording_params)
     redirect_to home_path
   end
 
   def destroy
+    @recording = Recording.find(params[:id])
+    @recording.destroy
+    redirect_to home_path
   end
 
   private 
     def  recording_params
-      params.require(:recording).permit(:video_file)
+      params.require(:recording).permit(:video_file,:title,:transcription)
     end 
 
     def upload
