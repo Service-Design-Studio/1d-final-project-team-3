@@ -13,13 +13,22 @@ Feature: To have a video recording of the conversation with deaf person
         Given that I am at "new" section of "recording" page
         Then I should see "Start" button
         When I click on the "Start" button
-        #add that button turns red and textbox populated with time stamp
         Then I should see "Stop" button
-    
-    Scenario: finish recording
-        Given that I am at "new" section of "recording" page
+        And the "Stop" button should be "red"
         When I click on the "Stop" button
         Then I should be brought to the "show" section of "recording" page
+
+    Scenario: User can view transription
+        Given that I am at "new" section of "recording" page
+        When I click on the "Start" button
+        And I am signing a handsign
+        Then I should see an English transcription of the handsign
+
+    Scenario: User can save transcription
+        Given that I am already recording a video with transcription
+        When I click on the "Stop" button
+        Then I should be brought to the "edit" section of "recording" page
+
 
 #check if seconds increases by 10 
 #accuracy of ML write as pending test case

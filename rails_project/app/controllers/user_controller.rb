@@ -3,9 +3,9 @@ class UserController < ApplicationController
 
   def index
     @user = current_user
-    unless logged_in?
-      redirect_to action: "new"
-    end
+    # unless logged_in?
+    #   redirect_to action: "new"
+    # end
   end
 
   def new

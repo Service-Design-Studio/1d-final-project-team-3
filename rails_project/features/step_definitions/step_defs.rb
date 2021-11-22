@@ -16,6 +16,7 @@ And('I should see Title, Date and Edit') do
     within('table') do
         expect(page).to have_xpath(".//th", :count => 4)
     end
+    Rails.application.load_seed
 end
 
 And('I should see {string} button') do |buttonName|
@@ -46,6 +47,10 @@ end
 
 Then 'I should be brought to the {string} section of {string} page' do |action,controller|
     expect(current_path).to eq "/#{controller}/#{action}"
+end
+
+Then 'I should be brought to the {string} page' do |action|
+    expect(current_path).to eq "/#{action}"
 end
 
 Given 'that I am on login page' do
@@ -82,4 +87,8 @@ end
 
 Given 'that I am on the "Recording Logs" page' do
     visit "/recording"
+end
+
+Given ('that I am at {string} page') do |controller|
+    visit "#{controller}"
 end

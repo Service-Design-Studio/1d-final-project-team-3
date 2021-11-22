@@ -1,7 +1,14 @@
-<div class="center">
+<%# <div class="center">
   <%= flash[:error] %>
-  <div class="form-group">
+  <%# <div class="form-group">
     <br><br><%=link_to "Log In with Google", '/auth/google_oauth2', method: :post%>
-    <br><br><%=link_to "Sign Up with Google", '/auth/google_oauth2', method: :post%>
-  </div>
+    <%# <br><br><%=link_to "Sign Up with Google", '/auth/google_oauth2', method: :post%>
+  <%# </div>
+</div> %> %> %> %>
+
+<%= render "layouts/nav" %>
+<div class='padding-sm'>
+<%= flash[:error] %>
+<%= button_to 'Log In with Google', "/auth/google_oauth2" , method: :post ,class:"btn btn-secondary btn-lg btn-block margin-top-md width-max"  =%>
+<%= button_to 'Sign Up with Google', '/auth/google_oauth2' , method: :post ,class:"btn btn-secondary btn-lg btn-block margin-top-md width-max"  =%>
 </div>
