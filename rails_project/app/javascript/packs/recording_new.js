@@ -127,6 +127,8 @@ function initRecordVideo(){
   function saveFile(blob){
     var formData = new FormData(form);
     formData.set("recording[video_file]", blob);
+    formData.set("recording[title]", dayjs().format('MMMM D, YYYY h:mm A'));
+    formData.set("recording[transcription]",text.innerHTML)
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/recording");
     xhr.send(formData);
