@@ -9,7 +9,7 @@ Feature: To have a video recording of the conversation with deaf person
         Then I should see "Start" button
         And I should see a video screen
 
-    Scenario: start recording
+    Scenario: start and finish recording
         Given that I am at "new" section of "recording" page
         Then I should see "Start" button
         When I click on the "Start" button
@@ -24,10 +24,10 @@ Feature: To have a video recording of the conversation with deaf person
         And I am signing a handsign
         Then I should see an English transcription of the handsign
 
-    Scenario: User can save transcription
-        Given that I am already recording a video with transcription
-        When I click on the "Stop" button
-        Then I should be brought to the "edit" section of "recording" page
+    Scenario: Text transcription box is updated
+        Given that I am at "new" section of "recording" page
+        When 10 seconds has passed
+        Then I should see the time increment by 10
 
 
 #check if seconds increases by 10 

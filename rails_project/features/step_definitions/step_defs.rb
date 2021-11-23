@@ -5,16 +5,20 @@ Given('that I am at {string} section of {string} page') do |action,controller|
 end
   
 Then('I should see a video screen') do
-    expect(page).to have_xpath '//*[@id="live"]'
+    expect(page).to have_xpath '//*[@id="video-player"]'
 end
 
 Then('I should see a logs table') do
     expect(page).to have_table
 end
 
+Then('I should be brought to the corresponding {string} page') do |path|
+    expect(current_path).to eq edit_recording_path(path)
+end
+
 And('I should see Title, Date and Edit') do
     within('table') do
-        expect(page).to have_xpath(".//th", :count => 4)
+        expect(page).to have_xpath(".//th", :count => 3)
     end
     Rails.application.load_seed
 end
@@ -34,15 +38,11 @@ When('I click on the {string} button') do |buttonName|
 end
 
 When 'I am signing a handsign' do
-    
+    next
 end
 
 Then 'I should see an English transcription of the handsign' do
-
-end
-
-Given 'I am already recording a video with transcription' do
-    
+    next
 end
 
 Then 'I should be brought to the {string} section of {string} page' do |action,controller|
@@ -91,4 +91,12 @@ end
 
 Given ('that I am at {string} page') do |controller|
     visit "#{controller}"
+end
+
+When ('10 seconds has passed') do 
+    expect(page).to  have_selector('textarea')
+end
+
+Then ('I should see the time increment by 10') do
+    expect(page).to have_text('00:00:10,000 --> 00:00:20,000:', wait: 10)
 end

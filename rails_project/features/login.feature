@@ -7,7 +7,7 @@ Feature: Log in with google account.
 
     Scenario: Redirect to oAuth screen
         Given that I am on login page
-        When I click on 'Log In with Google'
+        When I click on the 'Log In with Google' button
         Then I should see google oAuth login screen
 
     # Scenario: fill in credentials

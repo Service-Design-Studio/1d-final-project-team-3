@@ -15,7 +15,7 @@ Feature: To have a log of past video recordings, police officer’s notes and
     Scenario: link to correct past video screen
         Given that I am on the "Recording Logs" page
         When I click on the "Edit" button
-        Then I should be brought to the "edit" section of "recording" page
+        Then I should be brought to the corresponding "1" page
     
     Scenario: link to back to home 
         Given that I am on the "Recording Logs" page
