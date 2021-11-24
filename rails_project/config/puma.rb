@@ -1,5 +1,5 @@
 # Set up socket location
-bind "unix:///home/g1003466/1d-final-project-team-3/rails_project/tmp/sockets/puma.sock"
+# bind "unix:///home/g1003466/1d-final-project-team-3/rails_project/tmp/sockets/puma.sock"
 
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
