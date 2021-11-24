@@ -1,9 +1,9 @@
 class RecordingController < ApplicationController
   # skip_before_action :verify_authenticity_token
-  skip_before_action :require_login, only: [:new, :googleAuth, :index, :edit, :show]
+  # skip_before_action :require_login, only: [:new, :googleAuth, :index, :edit, :show]
   
   def index
-    @recordings = Recording.all
+    @recordings = Recording.where user_id: session[:user_id]
   end
 
   def new
@@ -11,6 +11,7 @@ class RecordingController < ApplicationController
   end
 
   def create
+    #post method
 
     puts('THE CREATES ENDPOINT IS BEING HIT')
     # params[:user_id] = current_user
@@ -25,11 +26,8 @@ class RecordingController < ApplicationController
     else 
       puts('NOOO')
     end 
-    # flash[:id]
-    # puts(params[:id])
+
     redirect_to home_path
-    # render :js => "window.location = '/recording/edit'"
-    # redirect_to edit_recording_path 
   end
 
 
@@ -49,12 +47,13 @@ class RecordingController < ApplicationController
 
   def destroy
     @recording = Recording.find(params[:id])
+    @recording.video_file.purge
     @recording.destroy
     redirect_to home_path
   end
 
   private 
-    def  recording_params
+    def recording_params
       params.require(:recording).permit(:video_file,:title,:transcription)
     end 
 

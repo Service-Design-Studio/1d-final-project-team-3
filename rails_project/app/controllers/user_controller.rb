@@ -3,7 +3,7 @@ class UserController < ApplicationController
 
   def index
     @user = current_user
-    p @user.email
+    p session[:user_id]
     unless logged_in?
       redirect_to action: "new"
     end

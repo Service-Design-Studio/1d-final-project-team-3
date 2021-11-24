@@ -58,8 +58,5 @@ class CreateRecordings < ActiveRecord::Migration[6.1]
       t.foreign_key :active_storage_blobs, column: :blob_id
     end
 
-    # add_reference :recordings, :active_storage_attachments, null: false, foreign_key: true
-    # add_column :recordings, :video_file, :active_storage_attachments
-
   end
 end

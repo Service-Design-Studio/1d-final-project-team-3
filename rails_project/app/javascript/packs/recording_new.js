@@ -129,20 +129,22 @@ function initRecordVideo(){
     formData.set("recording[video_file]", blob);
     formData.set("recording[title]", dayjs().format('MMMM D, YYYY h:mm A'));
     formData.set("recording[transcription]",text.innerHTML)
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/recording");
-    xhr.send(formData);
-    // var data = {"recording[video_file]": blob, "authenticity_token":token.getAttribute("value")};
-    // console.log(data);
-    // fetch("/recording", { method: 'POST', body:data})
-    //   .then(response => {
-    //     if (response.redirected) {
-    //       window.location.href = response.url;
-    //     }
-    //   })
-    //   .catch(function (err) {
-    //     console.info(err + " url: " + url);
-    //   });
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("POST", "/recording");
+    // xhr.send(formData);
+
+    fetch('/recording', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log('Success:', result);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
   }
 
   function btnOnClick() {
