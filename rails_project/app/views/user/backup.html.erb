@@ -1,0 +1,37 @@
+<div class="center">
+  <%= flash[:error] %>
+  <div class="form-group">
+    <br><br><%=link_to "Log In with Google", '/auth/google_oauth2', method: :post%>
+    <br><br><%=link_to "Sign Up with Google", '/auth/google_oauth2', method: :post%>
+  </div>
+</div>
+<div id="snackbar"><%= flash[:error] %></div>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+<div id="my-signin2"></div>
+<script>
+  function onSuccess(googleUser) {
+    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    console.log(googleUser)
+  }
+  function onFailure(error) {
+    console.log(error);
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
+  function renderButton() {
+    gapi.signin2.render('my-signin2', {
+      'scope': 'profile email',
+      'width': 240,
+      'height': 50,
+      'longtitle': true,
+      'theme': 'dark',
+      'onsuccess': onSuccess,
+      'onfailure': onFailure
+    });
+  }
+</script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>

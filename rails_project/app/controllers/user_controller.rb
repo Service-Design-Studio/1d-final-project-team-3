@@ -1,14 +1,20 @@
 class UserController < ApplicationController
-  skip_before_action :require_login, only: [:new, :googleAuth]
+  skip_before_action :require_login, only: [:login, :googleAuth]
 
   def index
     @user = current_user
+    p @user.email
     unless logged_in?
       redirect_to action: "new"
     end
   end
 
-  def new
+  def login
+  end
+
+  def logout
+    session.clear
+    redirect_to login_path
   end
 
   def googleAuth
@@ -24,12 +30,7 @@ class UserController < ApplicationController
     @user.google_refresh_token = refresh_token if refresh_token.present?
     @user.save
     session[:user_id] = @user.id
-    redirect_to home_path
-  end
-
-    #logout
-  def logout
-    session.clear
+    p User.all
     redirect_to home_path
   end
 
