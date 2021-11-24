@@ -1,5 +1,10 @@
-<div class="container">
-  <%= button_to "Sign in with Google", '/auth/google_oauth2'%>
+<%= render "layouts/nav" %>
+<div class="container", style="position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+padding: 10px;">
+  <%= button_to "Sign in with Google", '/auth/google_oauth2', class:"btn btn-primary btn-lg btn-block margin-top-md width-max"%>
 </div>
 
 <div id="snackbar"><%= flash[:error] %></div>
