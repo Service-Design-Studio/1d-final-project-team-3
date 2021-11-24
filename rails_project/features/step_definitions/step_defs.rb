@@ -1,9 +1,14 @@
 require 'capybara/rspec'
+require "rack_session_access/capybara"
 
 Given('that I am at {string} section of {string} page') do |action,controller|
     visit "#{controller}/#{action}"
 end
-  
+
+Given('that I am logged in') do 
+    page.set_rack_session(user_id: 1)
+end
+
 Then('I should see a video screen') do
     expect(page).to have_xpath '//*[@id="video-player"]'
 end
@@ -50,7 +55,11 @@ Then 'I should be brought to the {string} section of {string} page' do |action,c
 end
 
 Then 'I should be brought to the {string} page' do |action|
-    expect(current_path).to eq "/#{action}"
+    if action == 'Home'
+        expect(current_path).to eq "/"
+    else
+        expect(current_path).to eq "/#{action}"
+    end
 end
 
 Given 'that I am on login page' do
@@ -90,7 +99,11 @@ Given 'that I am on the "Recording Logs" page' do
 end
 
 Given ('that I am at {string} page') do |controller|
-    visit "#{controller}"
+    if controller =='Home'
+        visit "/"
+    else
+        visit "#{controller}"
+    end
 end
 
 When ('10 seconds has passed') do 

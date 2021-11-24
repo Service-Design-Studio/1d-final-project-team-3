@@ -9,9 +9,11 @@
     </p>
     <small id="emailHelp" class="form-text text-muted">Click on the title above to edit!</small>
   </div>
-  <div class='padding-sm'>
-    <%= video_tag url_for(@recording.video_file), controls:true, id: "video_player" %>
-  </div>
+  <% if !!@recording.video_file.attached? %>
+    <div class='padding-sm'>
+      <%= video_tag url_for(@recording.video_file), controls:true, id: "video_player" %>
+    </div>
+  <% end %>
   <p>
     <%= f.label :transcription %><br>
     <%= f.text_area :transcription,class:"transcription-box" %>
