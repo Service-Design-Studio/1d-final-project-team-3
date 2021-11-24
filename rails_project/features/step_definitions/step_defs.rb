@@ -21,6 +21,14 @@ Then('I should be brought to the corresponding {string} page') do |path|
     expect(current_path).to eq edit_recording_path(path)
 end
 
+Given('that I am on the edit page, {string} section') do |path|
+    visit edit_recording_path(path)
+end
+
+Then('I should see "Title" and "Transcription" text area') do 
+    expect(page).to have_selector('input')
+end
+
 And('I should see Title, Date and Edit') do
     within('table') do
         expect(page).to have_xpath(".//th", :count => 3)
@@ -78,14 +86,6 @@ Given 'that I am on the Google login page' do
     expect(page).to have_selector('input')
 end
 
-When 'I fill in my email' do
-    fill_in 'data-initial-value', :with => '1004413@sutd.edu.sg'
-end
-
-When 'I fill in my password' do
-    fill_in 'data-initial-value', :with => 'sutd1234'
-end
-
 And 'I click on the next button' do
     click_button "Next"
 end
@@ -112,4 +112,13 @@ end
 
 Then ('I should see the time increment by 10') do
     expect(page).to have_text('00:00:10,000 --> 00:00:20,000:', wait: 10)
+end
+
+When 'I fill in {string} with {string}' do |a ,b|
+    #fill_in a, :with => b
+    find(a).set b
+end
+
+Then 'a pop up will appear' do
+    next
 end

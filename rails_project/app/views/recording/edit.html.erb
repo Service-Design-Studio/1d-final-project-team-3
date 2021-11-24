@@ -14,16 +14,18 @@
       <%= video_tag url_for(@recording.video_file), controls:true, id: "video_player" %>
     </div>
   <% end %>
+  <div class='padding-sm'>
+
   <p>
     <%= f.label :transcription %><br>
     <%= f.text_area :transcription,class:"transcription-box" %>
-  </p>
+  </p> </div>
   <div class='padding-sm'>
   <%= f.submit class:"btn btn-primary btn-lg btn-block margin-top-md width-max"%>
   </div>
   <% end %>
     <div class='padding-sm margin-top-negative'>
-      <%= link_to  'destroy',
+      <%= button_to  'destroy',
       @recording,
       {
         :method=>:delete,
