@@ -14,6 +14,8 @@ class RecordingController < ApplicationController
     #post method
 
     puts('THE CREATES ENDPOINT IS BEING HIT')
+    render js: "#{home_path}"
+
     # params[:user_id] = current_user
     # p recording_params
     @recording = Recording.new(recording_params)
@@ -26,8 +28,6 @@ class RecordingController < ApplicationController
     else 
       puts('NOOO')
     end 
-
-    redirect_to home_path
   end
 
 

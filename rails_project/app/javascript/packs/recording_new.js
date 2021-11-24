@@ -128,23 +128,18 @@ function initRecordVideo(){
     var formData = new FormData(form);
     formData.set("recording[video_file]", blob);
     formData.set("recording[title]", dayjs().format('MMMM D, YYYY h:mm A'));
-    formData.set("recording[transcription]",text.innerHTML)
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("POST", "/recording");
-    // xhr.send(formData);
-
-    fetch('/recording', {
-      method: 'POST',
-      body: formData
-    })
-      .then(response => response.json())
-      .then(result => {
-        console.log('Success:', result);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-
+    formData.set("recording[transcription]",text.innerHTML);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/recording");
+    xhr.onreadystatechange = function () {
+      // return if not ready state 4
+      if (this.readyState !== 4) {
+        console.log(this.responseText)
+        return;
+      }
+      window.location.pathname = this.responseText
+    };
+    xhr.send(formData);
   }
 
   function btnOnClick() {
