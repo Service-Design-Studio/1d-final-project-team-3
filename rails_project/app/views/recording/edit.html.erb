@@ -1,13 +1,36 @@
 <%= render "layouts/nav" %>
 <div class='position-relative'>
   <div class='padding-sm'>
-    <h2 class='h2' contenteditable="true">Video Title</h2>
+    <%= form_for @recording do |f| %>
+    <%# <h2 class='h2' contenteditable="true"><%= @recording.title ></h2> %>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
     <small id="emailHelp" class="form-text text-muted">Click on the title above to edit!</small>
   </div>
   <div class='padding-sm'>
-    <%= video_tag "pby_wave.mp4", controls:true, id: "video_player"%>
+    <%= video_tag url_for(@recording.video_file), controls:true, id: "video_player" %>
   </div>
+  <p>
+    <%= f.label :transcription %><br>
+    <%= f.text_area :transcription,class:"transcription-box" %>
+  </p>
   <div class='padding-sm'>
-    <%= button_to 'Save Video', home_path, method: :put, class:"btn btn-primary btn-lg btn-block margin-top-md width-max" =%>
+  <%= f.submit class:"btn btn-primary btn-lg btn-block margin-top-md width-max"%>
   </div>
+  <% end %>
+    <div class='padding-sm margin-top-negative'>
+      <%= link_to  'destroy',
+      @recording,
+      {
+        :method=>:delete,
+        class:"btn btn-danger btn-lg btn-block margin-top-md width-max", 
+        data: { 
+          confirm: 'Are you certain you want to delete this?' 
+          }
+        } 
+      %>
+  </div>
+
 </div>
