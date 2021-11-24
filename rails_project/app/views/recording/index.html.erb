@@ -1,7 +1,7 @@
 <%= render "layouts/nav" %>
+<div class='padding-sm'>
+<h1>Past Logs</h1>
 
-<h1>Recording Logs</h1>
-<div>
 <table class='table'>
   <thead>
     <tr>
@@ -21,6 +21,7 @@
     <% end %>
   </tbody>
 </table>
-</div>
+
 
 <%= button_to 'Home', home_path , method: "get",class:"btn btn-primary btn-lg btn-block margin-top-md width-max"  %>
+</div>
