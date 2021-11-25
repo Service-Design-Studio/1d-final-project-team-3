@@ -152,8 +152,11 @@ function initRecordVideo(){
       streamInterval && clearInterval(streamInterval)
       App.livestream.unsubscribe()
       console.log("Tying up complete");
+      // btn.style.background = "#0000FF";
+      // btn.textContent = "Start"
       btn.style.background = "#0000FF";
-      btn.textContent = "Start"
+      btn.textContent = "Saving..."
+
     } else {
       btn.dataset.isRecording = !btn.dataset.isRecording;
 
