@@ -13,7 +13,7 @@ class UserController < ApplicationController
   end
 
   def logout
-    session.clear
+    reset_session
     redirect_to login_path
   end
 
@@ -29,6 +29,7 @@ class UserController < ApplicationController
     refresh_token = access_token.credentials.refresh_token
     @user.google_refresh_token = refresh_token if refresh_token.present?
     @user.save
+    reset_session
     session[:user_id] = @user.id
     p User.all
     redirect_to home_path
