@@ -33,7 +33,7 @@ class LivestreamChannel < ApplicationCable::Channel
     p "RECEIVED SOCKET DATA"
     begin
       p "DECODE DATA"
-      payload = self.create_payload(img64:data["data"], confidence_threshold:0.5, max_predictions:1)
+      payload = self.create_payload(img64:data["data"], confidence_threshold:0.0, max_predictions:1)
 
       p "sending data"
       response = self.send_request payload:payload
