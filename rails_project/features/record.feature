@@ -5,6 +5,7 @@ Feature: To have a video recording of the conversation with deaf person
     so that: I can review the recording later back at the station
 
     Scenario: pre-recording checks
+        Given that I am logged in
         Given that I am at "new" section of "recording" page
         Then I should see "Start" button
         And I should see a video screen
