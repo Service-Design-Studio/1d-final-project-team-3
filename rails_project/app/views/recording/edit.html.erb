@@ -2,8 +2,8 @@
 <div class='position-relative'>
   <div class='padding-sm'>
     <%= form_for @recording, class:"form-group" do |f| %>
-      <%= f.label :title, for:"title"%><br>
-      <%= f.text_field :title,class:"form-control",id:'title' %>
+      <%= f.label :title, for:"title",id:"title"%><br>
+      <%= f.text_field :title,class:"form-control"%>
     <small id="title-help" class="form-text text-muted">Click on the title above to edit!</small>
   </div>
   <% if !!@recording.video_file.attached? %>

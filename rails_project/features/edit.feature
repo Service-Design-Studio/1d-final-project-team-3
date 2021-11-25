@@ -15,7 +15,7 @@ Feature: To watch and edit past videos that have been saved to there recording l
         Given that I am logged in
         Given that I am on the edit page, "1" section
         When I fill in "#recording_title" with "Sample Title"
-        When I fill in "#recording_transcription" with "This is the new transcription"
+        When I fill in "#transcription" with "This is the new transcription"
         And I click on the "Update Recording" button
         Then I should be brought to the "Home" page
 
