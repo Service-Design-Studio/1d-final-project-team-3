@@ -10,7 +10,10 @@ class LivestreamChannel < ApplicationCable::Channel
   ## Gab model's endpoint
   # @@ENDPOINT_ID="8113384262289326080"
   # @@PROJECT_ID="1055029069246"
-  @@ENDPOINT_ID="926202206959435776"
+  ## Old closed off endpoint
+  # @@ENDPOINT_ID="926202206959435776"
+  ## Endpoint for Sprint 3 (25th Nov)
+  @@ENDPOINT_ID="1021622224064348160"
   @@PROJECT_ID="858374279331"
   @@LOCATION="us-central1"
   @@URI="https://us-central1-aiplatform.googleapis.com/v1/projects/#{@@PROJECT_ID}/locations/#{@@LOCATION}/endpoints/#{@@ENDPOINT_ID}:predict"

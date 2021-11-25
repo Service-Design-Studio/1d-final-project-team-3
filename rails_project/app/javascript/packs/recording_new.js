@@ -119,7 +119,7 @@ function initRecordVideo(){
       const startIntervalTime = startTime.add(count * 10, 'second')
       count += 1;
       const endIntervalTime = startTime.add(count * 10, 'second')
-      text.innerHTML += `\n ${startIntervalTime.format('HH:mm:ss,SSS')} --> ${endIntervalTime.format('HH:mm:ss,SSS')}: \n`
+      text.innerHTML += `\n${startIntervalTime.format('HH:mm:ss,SSS')} --> ${endIntervalTime.format('HH:mm:ss,SSS')}: \n`
       text.scrollTop = text.scrollHeight
     }, (10000));
   }
@@ -128,7 +128,7 @@ function initRecordVideo(){
     var formData = new FormData(form);
     formData.set("recording[video_file]", blob);
     formData.set("recording[title]", dayjs().format('MMMM D, YYYY h:mm A'));
-    formData.set("recording[transcription]",text.innerHTML);
+    formData.set("recording[transcription]",text.textContent);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/recording");
     xhr.onreadystatechange = function () {

@@ -1,13 +1,10 @@
 <%= render "layouts/nav" %>
 <div class='position-relative'>
   <div class='padding-sm'>
-    <%= form_for @recording do |f| %>
-    <%# <h2 class='h2' contenteditable="true"><%= @recording.title ></h2> %>
-    <p>
-      <%= f.label :title %><br>
-      <%= f.text_field :title %>
-    </p>
-    <small id="emailHelp" class="form-text text-muted">Click on the title above to edit!</small>
+    <%= form_for @recording, class:"form-group" do |f| %>
+      <%= f.label :title, for:"title"%><br>
+      <%= f.text_field :title,class:"form-control",id:'title' %>
+    <small id="title-help" class="form-text text-muted">Click on the title above to edit!</small>
   </div>
   <% if !!@recording.video_file.attached? %>
     <div class='padding-sm'>
@@ -17,8 +14,9 @@
   <div class='padding-sm'>
 
   <p>
-    <%= f.label :transcription %><br>
-    <%= f.text_area :transcription,class:"transcription-box" %>
+    <%= f.label :transcription, for:"transcription" %><br>
+    <%= f.text_area :transcription,class:"form-control transcription-box",id:"transcription" %>
+    <small id="transcription-help" class="form-text text-muted">Click on the title above to edit!</small>
   </p> </div>
   <div class='padding-sm'>
   <%= f.submit class:"btn btn-primary btn-lg btn-block margin-top-md width-max"%>
