@@ -5,6 +5,7 @@ Feature: To watch and edit past videos that have been saved to there recording l
     so that: I can refer to past videos and understand the hand signs
 
     Scenario: Validate edit recording UI
+        Given that I am logged in
         Given that I am on the edit page, "1" section
         Then I should see "Title" and "Transcription" text area
         And I should see "Update Recording" button
@@ -19,6 +20,7 @@ Feature: To watch and edit past videos that have been saved to there recording l
         Then I should be brought to the "Home" page
 
     Scenario: Video is destroyed
+        Given that I am logged in
         Given that I am on the edit page, "1" section
         And I click on the "destroy" button
         Then a pop up will appear
