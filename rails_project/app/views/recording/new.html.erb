@@ -10,6 +10,9 @@
   <textarea readonly id='transcription' class="form-control transcription-box" ></textarea>
   <%# <TextBox id='transcription1' readonly></TextBox> %>
 <div class='padding-sm'>
+<button type="button" class="btn btn-secondary btn-lg btn-block margin-top-md width-max" data-toggle="modal" data-target="#exampleModal">
+  Verify Translation
+</button>
     <button id="control-button" data-isRecording=false class="btn btn-primary btn-lg btn-block margin-top-md width-max">Start</button>
 </div>
 <form enctype="multipart/form-data" id="video-form" action="/recording" accept-charset="UTF-8" method="post">
@@ -17,3 +20,35 @@
   <input type="video" hidden name="recording[video_file]" id="recording-video-file">
 </form>
 
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Check the Translation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <p>Was this what you wanted to say?
+Please edit the message in the text field directly if 
+it is incorrect and press "confirm" once you are done!</p>
+<div class='padding-sm'>
+  <textarea id='transcription' class="form-control transcription-box" ></textarea>
+<form enctype="multipart/form-data" id="video-form" action="/recording" accept-charset="UTF-8" method="post">
+  <input type="hidden" id="token" name="authenticity_token" value=<%=form_authenticity_token%>>
+  <input type="video" hidden name="recording[video_file]" id="recording-video-file">
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
