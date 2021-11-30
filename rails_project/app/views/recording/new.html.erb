@@ -1,12 +1,12 @@
 <%= javascript_pack_tag 'recording_new.js' %>
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <%= render "layouts/nav" %>
 <div class='padding-sm'>
     <video style="border: 1px solid black" id="video-player" width="300"></video>
 </div>
-<div class='padding-sm'>
+<div class='padding-sm' id="#modalShow">
   <textarea readonly id='transcription' class="form-control transcription-box" ></textarea>
   <%# <TextBox id='transcription1' readonly></TextBox> %>
 <div class='padding-sm'>
@@ -38,12 +38,8 @@
         <p>Was this what you wanted to say?
 Please edit the message in the text field directly if 
 it is incorrect and press "confirm" once you are done!</p>
-<div class='padding-sm'>
-  <textarea id='transcription' class="form-control transcription-box" ></textarea>
-<form enctype="multipart/form-data" id="video-form" action="/recording" accept-charset="UTF-8" method="post">
-  <input type="hidden" id="token" name="authenticity_token" value=<%=form_authenticity_token%>>
-  <input type="video" hidden name="recording[video_file]" id="recording-video-file">
-</form>
+<div class='padding-sm form-group'>
+  <%# <textarea id='transcription' class="form-control transcription-box" ></textarea> %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -52,3 +48,11 @@ it is incorrect and press "confirm" once you are done!</p>
     </div>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $("#exampleModel").click(function(){
+    $("#myModal").modal('show').load("new.html.erb #modalShow");
+  });
+});
+</script>
