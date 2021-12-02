@@ -6,7 +6,7 @@ function initRecordVideo(){
   const INTERVAL = 1500
   const btn = document.getElementById("control-button")
   const player = document.getElementById("video-player")
-  const text = document.getElementById('transcription')
+  const texts = document.getElementsByClassName('transcription-box')
   const form = document.getElementById('video-form')
   // const token = document.getElementById('token')
   var textInterval = null
@@ -38,13 +38,17 @@ function initRecordVideo(){
       console.log(data)
       //data comes in every 1second
       // we are currently recording...
-      if (btn.dataset.isRecording) {
+      for (let text in texts) {
+
+        if (btn.dataset.isRecording) {
         const lastText = text.innerHTML.split(' ')
         if (lastText.at(-2) !== data.data) {
           text.innerHTML = text.innerHTML + (data.data ? data.data + ' ' : '')
         }
       }
     }
+      }
+      
   })
 
   function stopVideo(){
@@ -113,15 +117,23 @@ function initRecordVideo(){
   function streamText(){
     var startTime = dayjs('2018-04-04T16:00:00.000Z')
     var count = 1;
+    console.log(text.length)
+    for (let text in texts) {
     text.innerHTML = `00:00:00,000 --> 00:00:10,000: \n`
+    }
     //Every 10 seconds, we take the transcription, add it somewhere, then clear the transcription
     textInterval = setInterval(() => {
+
       const startIntervalTime = startTime.add(count * 10, 'second')
       count += 1;
       const endIntervalTime = startTime.add(count * 10, 'second')
-      text.innerHTML += `\n${startIntervalTime.format('HH:mm:ss,SSS')} --> ${endIntervalTime.format('HH:mm:ss,SSS')}: \n`
-      text.scrollTop = text.scrollHeight
+      
+      for (let text in texts) {
+        text.innerHTML += `\n${startIntervalTime.format('HH:mm:ss,SSS')} --> ${endIntervalTime.format('HH:mm:ss,SSS')}: \n`
+        text.scrollTop = text.scrollHeight}
+      
     }, (10000));
+  
   }
 
   function saveFile(blob){
