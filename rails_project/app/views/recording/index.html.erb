@@ -1,9 +1,9 @@
 <%= render "layouts/nav" %>
 <div class='padding-sm'>
 <h1>Past Logs</h1>
-
-<table class='table'>
-  <thead>
+<caption>View and edit all your past recordings</caption>
+<table class='table table-striped table-sm mt-3'>
+  <thead class="thead-light">
     <tr>
       <th scope="col">Title</th>
       <th scope="col">Date</th>
@@ -23,5 +23,5 @@
 </table>
 
 
-<%= button_to 'Home', home_path , method: "get",class:"btn btn-primary btn-lg btn-block margin-top-md width-max"  %>
+<%= button_to 'Home', home_path , method: "get",class:"btn btn-lg btn-block margin-top-md width-max text-white", style:'background-color:#3d5a80'  %>
 </div>
