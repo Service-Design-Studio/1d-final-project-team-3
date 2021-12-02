@@ -53,7 +53,7 @@ function initRecordVideo(){
 
   function startVideo(){
     return navigator.mediaDevices.getUserMedia({
-      video: true,
+      video: { facingMode: "environment",width: 420 },
       audio: false
     }).then(stream => {
       console.log('GOT PERMISSION!!')

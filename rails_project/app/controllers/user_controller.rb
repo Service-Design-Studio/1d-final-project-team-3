@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+  skip_forgery_protection
   skip_before_action :require_login, only: [:login, :googleAuth]
 
   def index

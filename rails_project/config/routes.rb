@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'login', to: 'user#login', as: 'login'
   post 'logout', to: 'user#logout', as: 'logout'
   get '/auth/:provider/callback' => 'user#googleAuth'
+  post '/auth/:provider/callback' => 'user#googleAuth'
   get 'auth/failure', to: 'user#login'
 
   ##redirect everything to root
