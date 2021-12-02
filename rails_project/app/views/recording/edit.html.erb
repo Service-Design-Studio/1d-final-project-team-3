@@ -8,7 +8,7 @@
   </div>
   <% if !!@recording.video_file.attached? %>
     <div class='padding-sm'>
-      <%= video_tag url_for(@recording.video_file), controls:true, id: "video_player" %>
+      <%= video_tag url_for(@recording.video_file), controls:true,playsinline:true,muted:true, id: "video_player" %>
     </div>
   <% end %>
   <div class='padding-sm'>
