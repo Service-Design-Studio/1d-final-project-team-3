@@ -1,20 +1,23 @@
-
-<div class="form-signin", style="position: absolute;
-left: 50%;
-top: 50%;
-transform: translate(-50%, -50%);
-padding: 60px;
-background-color:#fff;
-border-radius:8px;
-filter:drop-shadow(0 0 0.25rem grey);"
->
-<div class="text-center mb-4">
-  <%= image_tag("google-logo.png", :alt => "google", style:'height:72px;width:72px;', class:'mb-4') %>
-  <h1 class="h3 mb-3 font-weight-normal">Welcome</h1>
-  <p>Sign in with your Google account to access all the features.</p>
-  <p class="text-muted"> Works best on Chrome</p>
-  <%= button_to "Sign in with Google", '/auth/google_oauth2', class:"btn btn-primary btn-lg btn-block margin-top-md width-max"%>
-</div>
-</div>
+<body style="background-color:#284b63;
+width:100%;
+height:100%">
+  <div class="form-signin", style="position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 60px;
+  background-color:#fff;
+  border-radius:8px;
+  filter:drop-shadow(0 0 0.35rem grey);"
+  >
+      <div class="text-center mb-4">
+        <%= image_tag("google-logo.png", :alt => "google", style:'height:72px;width:72px;', class:'mb-4') %>
+        <h1 class="h3 mb-3 font-weight-normal">Welcome</h1>
+        <p>Sign in with your Google account to access all the features.</p>
+        <p class="text-muted"> Works best on Chrome</p>
+        <%= button_to "Sign in with Google", '/auth/google_oauth2', class:"btn btn-outline-secondary btn-lg btn-block margin-top-md width-max"%>
+      </div>
+  </div>
+</body>
 
 <div id="snackbar"><%= flash[:error] %></div>

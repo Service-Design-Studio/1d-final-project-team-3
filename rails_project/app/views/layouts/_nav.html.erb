@@ -1,6 +1,6 @@
 <!-- Navbar start -->
 <nav class="navbar navbar-light bg-light padding-sm">
-  <span class="mb-0 display-4">Recording App</span>
+  <span class="mb-0 h1">Recording App</span>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,13 +9,18 @@
 <div class="collapse navbar-collase" id="navbarToggleExternalContent">
     <div class='child-component text-right'>
         <ul  class="navbar-nav mr-auto float-right h2">
-          <li class="nav-item active"></li>
-            <%= link_to 'Home', home_path, style: "text-decoration: none !important" %>
-            <br>
+          <li class="nav-item active">
+          <%= link_to 'Home', home_path, style: "text-decoration: none !important" %>
+          </li>
+            <li class="nav-item active">
             <%= link_to 'Records', recording_index_path, style: "text-decoration: none !important" %>
           </li>
-          <li class="nav-item active margin-top-md"></li>
+          <li class="nav-item active margin-top-md">
+          <div>
+          <%= image_tag("log-out.svg", :alt => "google", style:'height:30px;width:30px;') %>
             <%= link_to 'Log Out', logout_path, method: :post, style: "text-decoration: none !important", class:"text-danger" %>
+          </div>
+            
           </li>
         </ul>
     </div>
