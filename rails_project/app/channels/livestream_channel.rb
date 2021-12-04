@@ -7,13 +7,8 @@ require "rest-client"
 
 class LivestreamChannel < ApplicationCable::Channel
   include ServiceAccountHelper
-  ## Gab model's endpoint
-  # @@ENDPOINT_ID="8113384262289326080"
-  # @@PROJECT_ID="1055029069246"
-  ## Old closed off endpoint
-  # @@ENDPOINT_ID="926202206959435776"
-  ## Endpoint for Sprint 3 (25th Nov)
-  @@ENDPOINT_ID="1021622224064348160"
+  ## Endpoint for Sprint 4 (2nd Dec)
+  @@ENDPOINT_ID="4332330900135084032"
   @@PROJECT_ID="858374279331"
   @@LOCATION="us-central1"
   @@URI="https://us-central1-aiplatform.googleapis.com/v1/projects/#{@@PROJECT_ID}/locations/#{@@LOCATION}/endpoints/#{@@ENDPOINT_ID}:predict"
@@ -33,7 +28,7 @@ class LivestreamChannel < ApplicationCable::Channel
     p "RECEIVED SOCKET DATA"
     begin
       p "DECODE DATA"
-      payload = self.create_payload(img64:data["data"], confidence_threshold:0.0, max_predictions:1)
+      payload = self.create_payload(img64:data["data"], confidence_threshold:0.5, max_predictions:1)
 
       p "sending data"
       response = self.send_request payload:payload
