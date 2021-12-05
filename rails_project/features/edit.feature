@@ -9,7 +9,7 @@ Feature: To watch and edit past videos that have been saved to there recording l
         Given that I am on the edit page, "1" section
         Then I should see "Title" and "Transcription" text area
         And I should see "Update Recording" button
-        And I should see "destroy" button
+        And I should see "Destroy" button
 
     Scenario: Title and Transcript is editable
         Given that I am logged in
@@ -22,5 +22,5 @@ Feature: To watch and edit past videos that have been saved to there recording l
     Scenario: Video is destroyed
         Given that I am logged in
         Given that I am on the edit page, "1" section
-        And I click on the "destroy" button
+        And I click on the "Destroy" button
         Then a pop up will appear
