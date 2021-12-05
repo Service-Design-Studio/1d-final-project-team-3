@@ -40,9 +40,10 @@ function initRecordVideo(){
       //data comes in every 1second
       // we are currently recording...
       if (btn.dataset.isRecording) {
-        const lastText = text.split(' ')
-        if (lastText.at(-2) !== data.data) {
+        const lastText = text.split(' ').at(-2).replace('\n','')
+        if (lastText !== data.data) {
           text = text + (data.data ? data.data + ' ' : '')
+          textTranscription.lastElementChild.innerHTML += (data.data ? data.data + ' ' : '')
         }
       }
     }
@@ -115,17 +116,27 @@ function initRecordVideo(){
     var startTime = dayjs('2018-04-04T16:00:00.000Z')
     var count = 1;
     text = `00:00:00,000 --> 00:00:10,000: \n`
-    textTranscription.innerHTML = text
+    createTranscriptionElement('00:00', '')
     //Every 10 seconds, we take the transcription, add it somewhere, then clear the transcription
     textInterval = setInterval(() => {
-      console.log(text)
       const startIntervalTime = startTime.add(count * 10, 'second')
       count += 1;
       const endIntervalTime = startTime.add(count * 10, 'second')
       text += `\n${startIntervalTime.format('HH:mm:ss,SSS')} --> ${endIntervalTime.format('HH:mm:ss,SSS')}: \n`
-      textTranscription.innerHTML = text
+      createTranscriptionElement(endIntervalTime.format('mm:ss'), '')
       textTranscription.scrollTop = textTranscription.scrollHeight
     }, (10000));
+  }
+
+  function createTranscriptionElement(timestamp, content){
+    let timestampElement = document.createElement('div')
+    timestampElement.className = 'transcription-box-timestramp'
+    timestampElement.textContent = timestamp
+    textTranscription.appendChild(timestampElement)
+
+    let contentElement = document.createElement('p')
+    contentElement.textContent = content
+    textTranscription.appendChild(contentElement)
   }
 
   function saveFile(blob){

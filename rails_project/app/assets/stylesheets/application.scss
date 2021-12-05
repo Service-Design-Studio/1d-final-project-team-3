@@ -55,7 +55,16 @@
 }
 
 .transcription-box {
-    height: 20vh;
+    height: 30vh;
+    display: grid;
+    grid-template-columns: 20% auto;
+    align-content: start;
+    overflow-y:scroll;
+}
+
+.transcription-box-timestramp{
+  font-size:medium;
+  color:grey;
 }
 
 .container {
