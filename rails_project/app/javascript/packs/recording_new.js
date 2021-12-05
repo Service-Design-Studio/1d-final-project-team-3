@@ -2,11 +2,12 @@ import App from "channels/livestream_channel"
 
 window.onload = initRecordVideo
 
+var text = ``
 function initRecordVideo(){
   const INTERVAL = 1500
   const btn = document.getElementById("control-button")
   const player = document.getElementById("video-player")
-  const text = document.getElementById('transcription')
+  const textTranscription = document.getElementById('transcription')
   const form = document.getElementById('video-form')
   // const token = document.getElementById('token')
   var textInterval = null
@@ -39,9 +40,9 @@ function initRecordVideo(){
       //data comes in every 1second
       // we are currently recording...
       if (btn.dataset.isRecording) {
-        const lastText = text.innerHTML.split(' ')
+        const lastText = text.split(' ')
         if (lastText.at(-2) !== data.data) {
-          text.innerHTML = text.innerHTML + (data.data ? data.data + ' ' : '')
+          text = text + (data.data ? data.data + ' ' : '')
         }
       }
     }
@@ -113,14 +114,17 @@ function initRecordVideo(){
   function streamText(){
     var startTime = dayjs('2018-04-04T16:00:00.000Z')
     var count = 1;
-    text.innerHTML = `00:00:00,000 --> 00:00:10,000: \n`
+    text = `00:00:00,000 --> 00:00:10,000: \n`
+    textTranscription.innerHTML = text
     //Every 10 seconds, we take the transcription, add it somewhere, then clear the transcription
     textInterval = setInterval(() => {
+      console.log(text)
       const startIntervalTime = startTime.add(count * 10, 'second')
       count += 1;
       const endIntervalTime = startTime.add(count * 10, 'second')
-      text.innerHTML += `\n${startIntervalTime.format('HH:mm:ss,SSS')} --> ${endIntervalTime.format('HH:mm:ss,SSS')}: \n`
-      text.scrollTop = text.scrollHeight
+      text += `\n${startIntervalTime.format('HH:mm:ss,SSS')} --> ${endIntervalTime.format('HH:mm:ss,SSS')}: \n`
+      textTranscription.innerHTML = text
+      textTranscription.scrollTop = textTranscription.scrollHeight
     }, (10000));
   }
 
@@ -128,7 +132,7 @@ function initRecordVideo(){
     var formData = new FormData(form);
     formData.set("recording[video_file]", blob);
     formData.set("recording[title]", dayjs().format('MMMM D, YYYY h:mm A'));
-    formData.set("recording[transcription]",text.textContent);
+    formData.set("recording[transcription]",text);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/recording");
     xhr.onreadystatechange = function () {
