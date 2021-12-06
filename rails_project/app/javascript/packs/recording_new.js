@@ -11,6 +11,7 @@ function initRecordVideo(){
   const form = document.getElementById('video-form')
   // const token = document.getElementById('token')
   var textInterval = null
+  var textPlaceholder = ''
   var streamInterval = null
   const streamObj = startVideo()
   window.onbeforeunload = stopVideo
@@ -42,9 +43,12 @@ function initRecordVideo(){
         const lastText = text.split(' ').at(-2).replace('\n','')
         console.log(lastText)
         console.log(data)
-        if (lastText !== data.data) {
-          text = text + (data.data ? data.data + ' ' : '')
-          textTranscription.lastElementChild.innerHTML += (data.data ? data.data + ' ' : '')
+        if (data.data != null && data.data != textPlaceholder) {
+          textPlaceholder = data.data
+          text = text + data.data
+          textTranscription.lastElementChild.innerHTML += data.data
+          // text = text + (data.data ? data.data + ' ' : '')
+          // textTranscription.lastElementChild.innerHTML += (data.data ? data.data + ' ' : '')
         }
       }
     }
