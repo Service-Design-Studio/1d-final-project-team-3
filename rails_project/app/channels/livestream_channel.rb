@@ -8,7 +8,7 @@ require "rest-client"
 class LivestreamChannel < ApplicationCable::Channel
   include ServiceAccountHelper
   ## Endpoint for Sprint 4 (2nd Dec)
-  @@ENDPOINT_ID="7701023421408215040"
+  @@ENDPOINT_ID="2801107026829115392"
   @@PROJECT_ID="858374279331"
   @@LOCATION="us-central1"
   @@URI="https://us-central1-aiplatform.googleapis.com/v1/projects/#{@@PROJECT_ID}/locations/#{@@LOCATION}/endpoints/#{@@ENDPOINT_ID}:predict"

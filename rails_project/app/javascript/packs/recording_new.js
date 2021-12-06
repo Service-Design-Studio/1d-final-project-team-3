@@ -36,11 +36,12 @@ function initRecordVideo(){
     received(data) {
       // Called when there's incoming data on the websocket for this channel
       console.log('Receiving text data from livestream...')
-      console.log(data)
       //data comes in every 1second
       // we are currently recording...
       if (btn.dataset.isRecording) {
         const lastText = text.split(' ').at(-2).replace('\n','')
+        console.log(lastText)
+        console.log(data)
         if (lastText !== data.data) {
           text = text + (data.data ? data.data + ' ' : '')
           textTranscription.lastElementChild.innerHTML += (data.data ? data.data + ' ' : '')
