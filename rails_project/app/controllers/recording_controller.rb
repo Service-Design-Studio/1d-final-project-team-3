@@ -42,7 +42,8 @@ class RecordingController < ApplicationController
   def update
     @recording = Recording.find(params[:id])
     @recording.update(recording_params)
-    redirect_to home_path
+    redirect_to home_path alert: 'Recording was updated!'
+
   end
 
   def destroy

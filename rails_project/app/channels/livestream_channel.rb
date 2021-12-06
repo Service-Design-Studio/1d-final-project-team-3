@@ -28,12 +28,15 @@ class LivestreamChannel < ApplicationCable::Channel
     p "RECEIVED SOCKET DATA"
     begin
       p "DECODE DATA"
-      payload = self.create_payload(img64:data["data"], confidence_threshold:0.5, max_predictions:1)
-
+      payload = self.create_payload(img64:data["data"], confidence_threshold:0.3, max_predictions:1)
+      starting = Time.now
       p "sending data"
       response = self.send_request payload:payload
       data = JSON.parse(response.body)
-
+      ending = Time.now
+      elapsed = ending - starting
+      p 'LATENCY'
+      p elapsed
       # Get display name
       p data["predictions"][0]
     rescue => exception

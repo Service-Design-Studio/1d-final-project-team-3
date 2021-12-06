@@ -1,8 +1,10 @@
 class UserController < ApplicationController
   skip_forgery_protection
   skip_before_action :require_login, only: [:login, :googleAuth]
-
   def index
+    if params['alert']
+      @alert = params['alert']
+    end
     @user = current_user
     p session[:user_id]
     unless logged_in?

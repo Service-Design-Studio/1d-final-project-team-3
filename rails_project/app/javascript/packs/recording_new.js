@@ -3,8 +3,8 @@ import App from "channels/livestream_channel"
 window.onload = initRecordVideo
 
 var text = ``
-function initRecordVideo(){
-  const INTERVAL = 1500
+function initRecordVideo() {
+  const INTERVAL = 500
   const btn = document.getElementById("control-button")
   const player = document.getElementById("video-player")
   const textTranscription = document.getElementById('transcription')
@@ -40,27 +40,25 @@ function initRecordVideo(){
       //data comes in every 1second
       // we are currently recording...
       if (btn.dataset.isRecording) {
-        const lastText = text.split(' ').at(-2).replace('\n','')
-        console.log(lastText)
-        console.log(data)
+        const lastText = text.split(' ').at(-2).replace('\n', '')
         if (data.data != null && data.data != textPlaceholder) {
           textPlaceholder = data.data
-          text = text + data.data
-          textTranscription.lastElementChild.innerHTML += data.data
-          // text = text + (data.data ? data.data + ' ' : '')
-          // textTranscription.lastElementChild.innerHTML += (data.data ? data.data + ' ' : '')
+          // text = text + data.data
+          // textTranscription.lastElementChild.innerHTML += data.data
+          text = text + (data.data ? data.data + ' ' : '')
+          textTranscription.lastElementChild.innerHTML += (data.data ? data.data + ' ' : '')
         }
       }
     }
   })
 
-  function stopVideo(){
+  function stopVideo() {
     player.srcObject.getTracks().forEach(track => track.stop());
   }
 
-  function startVideo(){
+  function startVideo() {
     return navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "environment",width: 420 },
+      video: { facingMode: "environment", width: 420 },
       audio: false
     }).then(stream => {
       console.log('GOT PERMISSION!!')
@@ -73,11 +71,11 @@ function initRecordVideo(){
     });
   }
 
-  function stopRecording(){
+  function stopRecording() {
     return new Promise(resolve => btn.addEventListener("click", resolve));
   }
 
-  function startRecording(stream){
+  function startRecording(stream) {
     const recorder = new MediaRecorder(stream);
     let data = [];
     console.log("Starting to record video stream!");
@@ -117,7 +115,7 @@ function initRecordVideo(){
     }, INTERVAL)
   }
 
-  function streamText(){
+  function streamText() {
     var startTime = dayjs('2018-04-04T16:00:00.000Z')
     var count = 1;
     text = `00:00:00,000 --> 00:00:10,000: \n`
@@ -133,7 +131,7 @@ function initRecordVideo(){
     }, (10000));
   }
 
-  function createTranscriptionElement(timestamp, content){
+  function createTranscriptionElement(timestamp, content) {
     let timestampElement = document.createElement('div')
     timestampElement.className = 'transcription-box-timestramp'
     timestampElement.textContent = timestamp
@@ -144,11 +142,11 @@ function initRecordVideo(){
     textTranscription.appendChild(contentElement)
   }
 
-  function saveFile(blob){
+  function saveFile(blob) {
     var formData = new FormData(form);
     formData.set("recording[video_file]", blob);
     formData.set("recording[title]", dayjs().format('MMMM D, YYYY h:mm A'));
-    formData.set("recording[transcription]",text);
+    formData.set("recording[transcription]", text);
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/recording");
     xhr.onreadystatechange = function () {
@@ -157,7 +155,7 @@ function initRecordVideo(){
         console.log(this.responseText)
         return;
       }
-      window.location.pathname = this.responseText
+      window.location.pathname = `${this.responseText}`
     };
     xhr.send(formData);
   }
@@ -186,7 +184,7 @@ function initRecordVideo(){
           console.log("Stopping recording of video stream!");
           saveFile(recordedBlob);
         })
-      
+
       streamFrames()
       streamText()
       btn.style.background = "#FF0000";
