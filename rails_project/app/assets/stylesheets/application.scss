@@ -1,0 +1,149 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap";
+
+@import './recording.scss';
+
+.padding-sm{
+    padding:16px 12px;
+}
+
+.margin-top-md{
+    margin-top:24px;
+}
+
+.margin-top-negative{
+    margin-top:-32px
+}
+.width-max{
+    width:100%
+}
+.navbar-collapse {
+    z-index: 1;
+   // position: absolute;
+  }
+  
+.alert-fixed {
+    position:fixed; 
+    top: 0px; 
+    left: 0px; 
+    padding:5px;
+    width: 100%;
+    z-index:9999; 
+    border-radius:0px
+}
+
+#navbarToggleExternalContent{
+    position:absolute;
+    z-index: 100;
+    background-color: rgb(228, 228, 228);
+}
+.child-component{
+    width:100vw;
+    height:100vh;
+    padding: 0.8rem;
+}
+
+.float-right {
+    float: right;
+}
+.text-right {
+    text-align: right;
+}
+
+.transcription-box {
+    height: 30vh;
+    display: grid;
+    grid-template-columns: 20% auto;
+    align-content: start;
+    overflow-y:scroll;
+}
+
+.transcription-box-timestramp{
+  font-size:medium;
+  color:grey;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  // vertical-align: auto;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+}
+
+.close {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+}
+
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

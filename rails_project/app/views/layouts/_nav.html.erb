@@ -1,0 +1,36 @@
+<!-- Navbar start -->
+<nav class="navbar navbar-light padding-sm", style='background-color:#98c1d9'>
+        <%= image_tag("signr.svg", :alt => "google", style:'width:110px;') %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+</nav>
+<div class="collapse navbar-collase" id="navbarToggleExternalContent" style='background-color:#e0fbfc'>
+    <div class='child-component text-right'>
+        <ul class="navbar-nav mr-auto float-right h2">
+          <li class="nav-item active mb-4">
+          <div>
+          <%= image_tag("record.svg", :alt => "google", style:'height:30px;width:30px;') %>
+            <%= link_to 'Home', home_path, style: "text-decoration: none !important; color: #3d5a80" %>
+          </div>
+          
+          </li>
+            <li class="nav-item active mb-4">
+            <div>
+              <%= image_tag("log.svg", :alt => "google", style:'height:30px;width:30px;') %>
+              <%= link_to 'Records', recording_index_path, style: "text-decoration: none !important;  color: #3d5a80" %>
+            </div>
+            
+          </li>
+          <li class="nav-item active margin-top-md">
+          <div>
+          <%= image_tag("log-out.svg", :alt => "google", style:'height:30px;width:30px;') %>
+            <%= link_to 'Log Out', logout_path, method: :post, style: "text-decoration: none !important; color: #ee6c4d" %>
+          </div>
+            
+          </li>
+        </ul>
+    </div>
+</div>
+<!-- Navbar end -->

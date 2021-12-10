@@ -1,0 +1,21 @@
+<%= javascript_pack_tag 'recording_new.js' %>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+
+
+<%= render "layouts/nav" %>
+<div class='padding-sm'>
+    <video style="border: 1px solid #98c1d9; border-radius:8px" id="video-player" playsinline></video>
+</div>
+<div class='padding-sm'>
+  <div readonly id='transcription' class="form-control transcription-box" >
+    <!-- Content will be filled using javascript -->
+  </div>
+  <%# <TextBox id='transcription1' readonly></TextBox> %>
+<div class='padding-sm'>
+    <button id="control-button" data-isRecording=false class="btn btn-lg btn-block margin-top-md width-max text-white" style='background-color:#3d5a80'>Start</button>
+</div>
+<form enctype="multipart/form-data" id="video-form" action="/recording" accept-charset="UTF-8" method="post">
+  <input type="hidden" id="token" name="authenticity_token" value=<%=form_authenticity_token%>>
+  <input type="video" hidden name="recording[video_file]" id="recording-video-file">
+</form>
+

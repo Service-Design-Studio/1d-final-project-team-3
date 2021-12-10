@@ -1,0 +1,27 @@
+<%= render "layouts/nav" %>
+<div class='padding-sm'>
+<h1>Past Logs</h1>
+<caption>View and edit all your past recordings</caption>
+<table class='table table-striped table-sm mt-3'>
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Date</th>
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recordings.each do |record| %>
+      <tr class='clickable-row' data-link="<%= edit_recording_path(record)%>"> 
+        <td><%= record.title %></td>
+        <td><%= record.created_at.to_time.in_time_zone('Singapore').strftime('%e %B %Y %l:%M %p') %></td>
+        <td><%=button_to 'Edit', edit_recording_path(record), method:'get', class:"btn btn-light"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= button_to 'Home', home_path , method: "get",class:"btn btn-lg btn-block margin-top-md width-max text-white", style:'background-color:#3d5a80'  %>
+</div>
